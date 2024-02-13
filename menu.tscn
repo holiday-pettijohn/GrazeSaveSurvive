@@ -5,23 +5,36 @@
 [node name="MarginContainer" type="MarginContainer"]
 offset_right = 400.0
 offset_bottom = 400.0
-theme_override_constants/margin_left = 20
+theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 20
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Start
+text = "Graze Save Survive"
+horizontal_alignment = 1
+
+[node name="Start Run Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Run
 "
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="Upgrades Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Upgrades"
+
+[node name="Options Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 script = ExtResource("1_8vvve")
 
-[connection signal="pressed" from="VBoxContainer/Button2" to="VBoxContainer/Button2" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit Button" to="VBoxContainer/Quit Button" method="_on_pressed"]
