@@ -14,3 +14,8 @@ config/name="Graze Save Survive"
 run/main_scene="res://base_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=400
+window/size/viewport_height=400
