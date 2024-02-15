@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5tulfxd2e8c8"]
+
+[ext_resource type="Script" path="res://Button2.gd" id="1_8vvve"]
+
+[node name="MarginContainer" type="MarginContainer"]
+offset_right = 400.0
+offset_bottom = 400.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Graze Save Survive"
+horizontal_alignment = 1
+
+[node name="Start Run Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Run
+"
+
+[node name="Upgrades Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Upgrades"
+
+[node name="Options Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+script = ExtResource("1_8vvve")
+
+[connection signal="pressed" from="VBoxContainer/Quit Button" to="VBoxContainer/Quit Button" method="_on_pressed"]
