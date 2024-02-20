@@ -141,3 +141,22 @@ layer_0/tile_data = PackedInt32Array(0, 655361, 4, 65536, 655361, 5, 131072, 655
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource("3_wlp0x")
+
+[node name="TimerLabel" type="RichTextLabel" parent="Timer"]
+offset_left = 266.0
+offset_top = 57.0
+offset_right = 445.0
+offset_bottom = 97.0
+text = "Timer:"
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 14.0
+offset_top = 17.0
+offset_right = 149.0
+offset_bottom = 63.0
+
+[node name="XPBar" type="TextureProgressBar" parent="."]
+offset_left = 641.0
+offset_top = 21.0
+offset_right = 776.0
+offset_bottom = 67.0
