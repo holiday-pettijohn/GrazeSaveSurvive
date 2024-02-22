@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5tulfxd2e8c8"]
 
-[ext_resource type="Script" path="res://Button2.gd" id="1_8vvve"]
+[ext_resource type="Script" path="res://QuitButton.gd" id="1_8vvve"]
 [ext_resource type="Script" path="res://Upgrades_Button.gd" id="1_xjpvx"]
 
 [node name="MarginContainer" type="MarginContainer"]
