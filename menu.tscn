@@ -37,4 +37,5 @@ layout_mode = 2
 text = "Quit"
 script = ExtResource("1_8vvve")
 
+[connection signal="pressed" from="VBoxContainer/Options Button" to="VBoxContainer/Quit Button" method="_ready"]
 [connection signal="pressed" from="VBoxContainer/Quit Button" to="VBoxContainer/Quit Button" method="_on_pressed"]

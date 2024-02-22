@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://diin1cbx7aik1"]
+
+[ext_resource type="Script" path="res://Button2.gd" id="1_5v1ca"]
+
+[node name="MarginContainer" type="MarginContainer"]
+offset_right = 400.0
+offset_bottom = 400.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+
+[node name="Controls" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
+[node name="ScreenRes" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Screen Resolution
+"
+
+[node name="VolumeCtrl" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Master Volume:"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 2.08165e-12
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"
+script = ExtResource("1_5v1ca")
+
+[connection signal="value_changed" from="VBoxContainer/HSlider" to="VBoxContainer/Back" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="VBoxContainer/Back" method="_on_pressed"]
