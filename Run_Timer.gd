@@ -12,5 +12,6 @@ func _ready():
 func _process(delta):
 	if (is_stopped()):
 		#Display results screen scene
+		get_tree().change_scene("res://results.tscn")
 		pass
 	
