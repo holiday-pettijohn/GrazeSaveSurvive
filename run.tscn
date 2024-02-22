@@ -126,7 +126,7 @@ offset = Vector2(400, 400)
 position = Vector2(400, 400)
 sprite_frames = SubResource("SpriteFrames_3wcpd")
 animation = &"run"
-frame_progress = 0.252089
+frame_progress = 0.493776
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
