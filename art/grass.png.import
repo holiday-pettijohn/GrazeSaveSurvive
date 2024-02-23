@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cirdphg3y2eyp"
-path="res://.godot/imported/cow_oga.png-95d0d3acd1ca01dde3c3de21a975f8df.ctex"
+uid="uid://drdnv41l2ddo4"
+path="res://.godot/imported/grass.png-af9205a0fdfd145e55fd9de45a00e35a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cow_oga.png"
-dest_files=["res://.godot/imported/cow_oga.png-95d0d3acd1ca01dde3c3de21a975f8df.ctex"]
+source_file="res://art/grass.png"
+dest_files=["res://.godot/imported/grass.png-af9205a0fdfd145e55fd9de45a00e35a.ctex"]
 
 [params]
 
