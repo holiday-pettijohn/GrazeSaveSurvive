@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://brpm2kg82dhhe"]
+[gd_scene load_steps=3 format=3 uid="uid://brpm2kg82dhhe"]
+
+[ext_resource type="Script" path="res://Results.gd" id="1_pdk4j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ygg25"]
 font_size = 32
@@ -29,6 +31,7 @@ offset_top = 696.0
 offset_right = 446.0
 offset_bottom = 727.0
 text = "Main Menu"
+script = ExtResource("1_pdk4j")
 
 [node name="Results" type="Label" parent="."]
 offset_left = 289.0
@@ -46,3 +49,5 @@ offset_bottom = 440.0
 text = "Loadout:
 Horns: 300 Damage
 Enchanted Horn Shot: 1200 Damage"
+
+[connection signal="pressed" from="Menu" to="Menu" method="_on_menu_return_pressed"]
