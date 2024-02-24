@@ -6,6 +6,8 @@ signal death
 var screen_size
 var hp
 
+var alive
+
 func set_stats():
 	#Player Stats (from parent)
 	MAX_HP = 1
@@ -18,12 +20,13 @@ func set_stats():
 	
 	#Assigning values
 	hp = MAX_HP
+	alive = true
 
 func start(start_position):
 	position = start_position
 	set_stats();
-	$AnimatedSprite2D.animation = "idle"
-	$AnimatedSprite2D.play()
+	$PlayerSprite.animation = "idle"
+	$PlayerSprite.play()
 	show()
 
 # Called when the node enters the scene tree for the first time.
@@ -34,39 +37,51 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move(delta)
+
 	
 func move(delta):
 	#Process player movement
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * SPEED
-		$AnimatedSprite2D.animation = "run"
-	else:
-		$AnimatedSprite2D.animation = "idle"
+	if alive:
+		var velocity = Vector2.ZERO
+		if Input.is_action_pressed("move_right"):
+			velocity.x += 1
+		if Input.is_action_pressed("move_left"):
+			velocity.x -= 1
+		if Input.is_action_pressed("move_down"):
+			velocity.y += 1
+		if Input.is_action_pressed("move_up"):
+			velocity.y -= 1
 		
-	if velocity.x != 0:
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	
-	#Update player position
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size) #Player cannot leave screen
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * SPEED
+			$PlayerSprite.animation = "run"
+		else:
+			$PlayerSprite.animation = "idle"
+		
+		if velocity.x != 0:
+			$PlayerSprite.flip_h = velocity.x < 0
+		
+		#Update player position
+		position += velocity * delta
+		position = position.clamp(Vector2.ZERO, screen_size) #Player cannot leave screen
 
 
-func _on_body_entered(body):
-	print(body, " entered!")
-	hp -= 1
-	hit.emit()
+func _on_hurt_area_entered(area):
+	print(area, " entered!")
+	print(area.get_parent().GROUP)
+	print(hp)
+	if area.get_parent().GROUP == 2:
+		hp -= 1
+		hit.emit()
 	
 	#Player death
 	if (hp <= 0):
-		$AnimatedSprite.animation = "death"
+		$PlayerSprite.animation = "death"
 		death.emit()
+
+func _on_death():
+	alive = false
+
+func _on_hit():
+	pass # Replace with function body.
+

@@ -22,6 +22,10 @@ func start_game():
 	
 func game_over():
 	$WaveTimer.stop()
+	$GameOverTimer.start()
+	
+func _on_game_over_timer_timeout():
+	get_tree().change_scene_to_file("res://results.tscn")
 
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1

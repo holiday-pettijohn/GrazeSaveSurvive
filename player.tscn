@@ -1,8 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7yaqvhsdemge"]
+[gd_scene load_steps=22 format=3 uid="uid://b7yaqvhsdemge"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rhtgq"]
 [ext_resource type="Texture2D" uid="uid://cirdphg3y2eyp" path="res://art/cow_oga.png" id="2_d3wot"]
 [ext_resource type="Texture2D" uid="uid://dvb6rn5vc0lo8" path="res://art/player_death.png" id="2_v54db"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gupks"]
+radius = 6.08276
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwlj7"]
 atlas = ExtResource("2_d3wot")
@@ -123,19 +126,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gupks"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_pfp8o"]
+radius = 43.0116
 
-[node name="Player" type="RigidBody2D" groups=["player"]]
-collision_mask = 2
-gravity_scale = 0.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0mbq"]
+size = Vector2(74, 35)
+
+[node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_rhtgq")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_vyj4h")
-animation = &"idle"
+[node name="Body" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hurtbox" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_gupks")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vyj4h")
+animation = &"death"
+
+[node name="PickupBody" type="Area2D" parent="."]
+
+[node name="PickupBox" type="CollisionShape2D" parent="PickupBody"]
+shape = SubResource("CircleShape2D_pfp8o")
+
+[node name="MeleeBody" type="Area2D" parent="."]
+
+[node name="MeleeBox" type="CollisionShape2D" parent="MeleeBody"]
+position = Vector2(27, -7.5)
+shape = SubResource("RectangleShape2D_o0mbq")
+
+[connection signal="death" from="." to="." method="_on_death"]
+[connection signal="area_entered" from="Body" to="." method="_on_hurt_area_entered"]

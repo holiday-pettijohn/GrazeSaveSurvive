@@ -9,18 +9,22 @@ func set_stats():
 	MAX_HP = 5
 	SPEED = 100
 	xp = 1
+	
+	GROUP = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_stats()
+	
 	move_left = false
-	$AnimatedSprite2D.animation = "walk_right"
+	$Sprite.animation = "walk_right"
 	if (self.position.x > 0):
 		move_left = true
-		$AnimatedSprite2D.animation = "walk_left"
+		$Sprite.animation = "walk_left"
 	start()
 
 func start():
-	$AnimatedSprite2D.play()
+	$Sprite.play()
 	hp = MAX_HP
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,9 +34,9 @@ func _process(delta):
 
 func move(delta):
 	if (move_left == false):
-		position.x += 100 * delta
+		position.x += SPEED * delta
 	else:
-		position.x -= 100 * delta
+		position.x -= SPEED * delta
 	
 func updateAnimation():
 	pass

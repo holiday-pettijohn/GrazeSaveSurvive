@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://v6dic6r8xqsf"]
+[gd_scene load_steps=2 format=3 uid="uid://p83quh33wq28"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="2_oysp5"]
+[ext_resource type="Script" path="res://Entity.gd" id="1_t1hjf"]
 
-[node name="Enemy" type="Node2D"]
-script = ExtResource("2_oysp5")
+[node name="Entity" type="Node2D"]
+script = ExtResource("1_t1hjf")
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
