@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="Graze Save Survive"
-run/main_scene="res://base_scene.tscn"
+run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=800
+window/size/viewport_height=800
 window/vsync/vsync_mode=0
 
 [input]
