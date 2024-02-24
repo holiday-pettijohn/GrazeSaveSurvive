@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://4aklglrru3bg"]
+[gd_scene load_steps=20 format=3 uid="uid://d0gq8ocgtjpuo"]
 
+[ext_resource type="Script" path="res://run.gd" id="1_loec8"]
 [ext_resource type="TileSet" uid="uid://bsnj5n8lmtgfu" path="res://background_forest.tres" id="1_pbmvx"]
-[ext_resource type="Texture2D" uid="uid://cirdphg3y2eyp" path="res://cow_oga.png" id="1_s2vs0"]
+[ext_resource type="Texture2D" uid="uid://cirdphg3y2eyp" path="res://art/cow_oga.png" id="1_s2vs0"]
 [ext_resource type="Script" path="res://Run_Timer.gd" id="3_wlp0x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xn8ji"]
@@ -116,6 +117,7 @@ animations = [{
 }]
 
 [node name="Run" type="Node2D"]
+script = ExtResource("1_loec8")
 
 [node name="Player" type="Node2D" parent="."]
 
@@ -148,6 +150,7 @@ offset_top = 57.0
 offset_right = 445.0
 offset_bottom = 97.0
 text = "Timer:"
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = 14.0
