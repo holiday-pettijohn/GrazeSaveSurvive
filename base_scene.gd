@@ -40,8 +40,9 @@ func setWaveTimer():
 	
 func updateWaveDisplay():
 	var text_secs = "0"
-	var text_mins = ""
+	var text_mins = "" #The string will be populated if mins > 0
 	text_secs = str(wave_timeleft % 60) + "s"
+	
 	var mins = int(wave_timeleft / 60) #Truncated
 	if (mins > 0):
 		text_mins = str(mins) + "m"
@@ -60,5 +61,6 @@ func spawnWave():
 		spawnPosition.x = get_viewport().size.x * int(c <= enemycount / 2) #Half spawn on left and right
 		spawnPosition.y = randi_range(0, get_viewport().size.y)
 		newEnemy.position = spawnPosition	
+		
 		add_child(newEnemy)
 		c -= 1
