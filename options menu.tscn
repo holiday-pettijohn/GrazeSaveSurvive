@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://diin1cbx7aik1"]
 
-[ext_resource type="Script" path="res://Button2.gd" id="1_5v1ca"]
+[ext_resource type="Script" path="res://options_menu.gd" id="1_5v1ca"]
 
 [node name="MarginContainer" type="MarginContainer"]
 offset_right = 400.0
@@ -43,4 +43,4 @@ text = "Back"
 script = ExtResource("1_5v1ca")
 
 [connection signal="value_changed" from="VBoxContainer/HSlider" to="VBoxContainer/Back" method="_on_h_slider_value_changed"]
-[connection signal="pressed" from="VBoxContainer/Back" to="VBoxContainer/Back" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="VBoxContainer/Back" method="_on_back_pressed"]

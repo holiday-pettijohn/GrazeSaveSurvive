@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5tulfxd2e8c8"]
+[gd_scene load_steps=5 format=3 uid="uid://b5tulfxd2e8c8"]
 
-[ext_resource type="Script" path="res://Button2.gd" id="1_8vvve"]
+[ext_resource type="Script" path="res://QuitButton.gd" id="1_8vvve"]
+[ext_resource type="Script" path="res://StartRun.gd" id="1_digdb"]
+[ext_resource type="Script" path="res://Upgrades_Button.gd" id="1_xjpvx"]
+[ext_resource type="Script" path="res://Options_Button.gd" id="3_vm0k0"]
 
 [node name="MarginContainer" type="MarginContainer"]
 offset_right = 400.0
@@ -23,19 +26,26 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Start Run
 "
+script = ExtResource("1_digdb")
 
 [node name="Upgrades Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Upgrades"
+script = ExtResource("1_xjpvx")
 
 [node name="Options Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Options"
+script = ExtResource("3_vm0k0")
 
 [node name="Quit Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 script = ExtResource("1_8vvve")
 
-[connection signal="pressed" from="VBoxContainer/Options Button" to="VBoxContainer/Quit Button" method="_ready"]
+[node name="Node2D" type="Node2D" parent="."]
+
+[connection signal="pressed" from="VBoxContainer/Start Run Button" to="VBoxContainer/Start Run Button" method="_on_run_pressed"]
+[connection signal="pressed" from="VBoxContainer/Upgrades Button" to="VBoxContainer/Upgrades Button" method="_on_upgrades_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options Button" to="VBoxContainer/Options Button" method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit Button" to="VBoxContainer/Quit Button" method="_on_pressed"]
