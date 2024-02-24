@@ -18,7 +18,6 @@ stretch_mode = 1
 [node name="Player" parent="." instance=ExtResource("2_7emnb")]
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(576, 324)
 
 [node name="WaveTimer" type="Timer" parent="."]
 

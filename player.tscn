@@ -132,6 +132,7 @@ script = ExtResource("1_rhtgq")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_vyj4h")
 animation = &"idle"
 

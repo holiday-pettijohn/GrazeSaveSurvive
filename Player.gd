@@ -9,7 +9,7 @@ var hp
 func set_stats():
 	#Player Stats (from parent)
 	MAX_HP = 1
-	SPEED = 300
+	SPEED = 150
 	DMG_CONTACT = 0
 	DMG_RANGED = 5
 	
