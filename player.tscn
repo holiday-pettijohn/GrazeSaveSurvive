@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b7yaqvhsdemge"]
+[gd_scene load_steps=20 format=3 uid="uid://b7yaqvhsdemge"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rhtgq"]
 [ext_resource type="Texture2D" uid="uid://cirdphg3y2eyp" path="res://art/cow_oga.png" id="2_d3wot"]
+[ext_resource type="Texture2D" uid="uid://dvb6rn5vc0lo8" path="res://art/player_death.png" id="2_v54db"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwlj7"]
 atlas = ExtResource("2_d3wot")
@@ -63,6 +64,14 @@ region = Rect2(666, 0, 111, 81)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_v54db")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nwlj7")
 }, {
 "duration": 1.0,
@@ -116,7 +125,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gupks"]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="RigidBody2D" groups=["player"]]
+collision_mask = 2
+gravity_scale = 0.0
 script = ExtResource("1_rhtgq")
 metadata/_edit_group_ = true
 
@@ -126,3 +137,5 @@ animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gupks")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

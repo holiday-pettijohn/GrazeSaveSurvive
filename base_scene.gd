@@ -1,6 +1,8 @@
 extends Node
 
-@export var wave_count = 1;
+@export var wave_count = 0
+var wave_duration : int
+var wave_timeleft : int
 @export var enemy_scene : PackedScene
 
 # Called when the node enters the scene tree for the first time.
@@ -13,45 +15,50 @@ func _process(delta):
 
 func start_game():
 	$Player.start($StartPosition.position)
+	wave_duration = 5 #Start with 5 second rest
+	wave_timeleft = wave_duration
 	updateWaveDisplay()
-	initializeWaves()
+	$WaveTimer.start()
 	
 func game_over():
 	$WaveTimer.stop()
 
 func _on_wave_timer_timeout():
+	wave_timeleft -= 1
+	
+	if (wave_timeleft <= 0):
+		spawnWave()
+		
+		wave_count += 1
+		setWaveTimer() #Reset timer
+		wave_timeleft = wave_duration
+		
+	updateWaveDisplay()
+
+func setWaveTimer():
+	wave_duration = (15*wave_count) + 5 #Waves get longer
+	
+func updateWaveDisplay():
+	var text_secs = "0"
+	var text_mins = ""
+	text_secs = str(wave_timeleft % 60) + "s"
+	var mins = int(wave_timeleft / 60) #Truncated
+	if (mins > 0):
+		text_mins = str(mins) + "m"
+
+	$WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
+	$WaveDisplay/displayWaveTime.text = text_mins + text_secs
+
+func spawnWave():
 	#Spawn enemies
 	var enemycount = 4 + wave_count #More enemies spawn per wave
 	var c = enemycount
 	
 	while (c > 0):
 		var newEnemy = enemy_scene.instantiate()
-		newEnemy.position.x = get_viewport().size.x * int(c <= enemycount / 2) #Half spawn on left and right
-		newEnemy.position.y = randi_range(0, get_viewport().size.y)
-		
-		#Set direction - I AM FIGURING IT OUT
-		#var direction = atan2($Player.position.y - newEnemy.position.y, $Player.position.x - newEnemy.position.x)
-		#newEnemy.rotation = direction
-		#var velocity = Vector2(25.0, 0.0)
-		#newEnemy.linear_velocity = velocity.rotated(direction)
-		
+		var spawnPosition = Vector2.ZERO
+		spawnPosition.x = get_viewport().size.x * int(c <= enemycount / 2) #Half spawn on left and right
+		spawnPosition.y = randi_range(0, get_viewport().size.y)
+		newEnemy.position = spawnPosition	
 		add_child(newEnemy)
-		
-		
 		c -= 1
-		
-	wave_count += 1
-	setWaitTime()
-	updateWaveDisplay()
-
-func setWaitTime():
-	#Waves get longer
-	$WaveTimer.wait_time = 15*wave_count
-
-func initializeWaves():
-	setWaitTime()
-	$WaveTimer.start()
-	
-func updateWaveDisplay():
-	$WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
-	$WaveDisplay/displayWaveTime.text = str($WaveTimer.time_left) + "s"

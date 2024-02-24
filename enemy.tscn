@@ -51,10 +51,11 @@ size = Vector2(32, 32)
 
 [node name="Enemy" instance=ExtResource("1_ayl5a")]
 script = ExtResource("2_oysp5")
+xp = 0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6856i")
-animation = &"walk"
+animation = &"idle"
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_iq4sw")
