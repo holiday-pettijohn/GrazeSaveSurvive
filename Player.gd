@@ -26,11 +26,11 @@ func start(start_position):
 	$AnimatedSprite2D.play()
 	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	#Set camera bounds
+	$Camera2D.limit_right = Globals.GAME_WIDTH
+	$Camera2D.limit_bottom = Globals.GAME_HEIGHT
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move(delta)
 	

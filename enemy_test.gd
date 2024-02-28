@@ -27,12 +27,17 @@ func start():
 func _process(delta):
 	move(delta)
 	#updateAnimation()
+	pass
 
 func move(delta):
-	if (move_left == false):
-		position.x += 100 * delta
-	else:
-		position.x -= 100 * delta
+	#Move towards player
+	var move_vector = get_parent().get_node("Player").position - position
+	position += move_vector.normalized() * 0.01
+	
+	#if (move_left == false):
+		#position.x += 100 * delta
+	#else:
+		#position.x -= 100 * delta
 	
 func updateAnimation():
 	pass
