@@ -3,7 +3,7 @@ extends Entity
 signal hit
 signal death
 
-var screen_size
+var map_size
 var hp
 
 func set_stats():
@@ -24,12 +24,11 @@ func start(start_position):
 	set_stats();
 	$AnimatedSprite2D.animation = "idle"
 	$AnimatedSprite2D.play()
-	show()
+	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
-	hide()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -58,8 +57,7 @@ func move(delta):
 	
 	#Update player position
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size) #Player cannot leave screen
-
+	position = position.clamp(Vector2.ZERO, Globals.GAME_SIZE) #Player cannot leave screen
 
 func _on_body_entered(body):
 	print(body, " entered!")

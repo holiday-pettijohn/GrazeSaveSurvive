@@ -15,9 +15,9 @@ func _process(delta):
 
 func start_game():
 	#Player starts in middle of screen
-	$StartPosition.position.x = get_viewport().size.x / 2
-	$StartPosition.position.y = get_viewport().size.y / 2
+	$StartPosition.position = Vector2(Globals.GAME_WIDTH / 2, Globals.GAME_HEIGHT / 2)
 	$Player.start($StartPosition.position)
+	
 	wave_duration = 5 #Start with 5 second rest
 	wave_timeleft = wave_duration
 	updateWaveDisplay()
