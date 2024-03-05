@@ -16,14 +16,13 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3urgt"]
 
-[node name="xpOrb" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="xpOrb" type="Area2D"]
 script = ExtResource("1_5x7gh")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="XpSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gvl1n")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="XpBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3urgt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
