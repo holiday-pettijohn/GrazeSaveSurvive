@@ -64,7 +64,7 @@ func spawnWave():
 		var spawnPosition = Vector2.ZERO
 		spawnPosition.x = get_viewport().size.x * int(c <= enemycount / 2) #Half spawn on left and right
 		spawnPosition.y = randi_range(0, get_viewport().size.y)
-		newEnemy.position = spawnPosition	
+		newEnemy.position = spawnPosition
 		
 		add_child(newEnemy)
 		c -= 1
