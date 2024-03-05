@@ -17,6 +17,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3urgt"]
 
 [node name="xpOrb" type="Area2D"]
+collision_layer = 2
 script = ExtResource("1_5x7gh")
 
 [node name="XpSprite" type="AnimatedSprite2D" parent="."]

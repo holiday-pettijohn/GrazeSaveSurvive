@@ -146,6 +146,7 @@ sprite_frames = SubResource("SpriteFrames_vyj4h")
 animation = &"death"
 
 [node name="PickupBody" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="PickupBox" type="CollisionShape2D" parent="PickupBody"]
 shape = SubResource("CircleShape2D_pfp8o")
