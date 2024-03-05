@@ -5,8 +5,14 @@ var wave_duration : int
 var wave_timeleft : int
 @export var enemy_scene : PackedScene
 
+#Tracking the camera
+var vport; var cam
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#Get viewport and camera
+	vport = get_viewport()
+	cam = vport.get_camera_2d()
 	start_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,6 +20,8 @@ func _process(delta):
 	pass
 
 func start_game():
+	#Player starts in middle of screen
+	$StartPosition.position = Vector2(Globals.MAP_WIDTH / 2, Globals.MAP_HEIGHT / 2)
 	$Player.start($StartPosition.position)
 	wave_duration = 5 #Start with 5 second rest
 	wave_timeleft = wave_duration
@@ -60,11 +68,31 @@ func spawnWave():
 	var c = enemycount
 	
 	while (c > 0):
+		#Get an offscreen spawn position
+		var spawnPosition
+		
+		var cam_rect = getCameraBounds()
+		var rand_xpos = randi_range(0, Globals.MAP_WIDTH)
+		var rand_ypos = randi_range(0, Globals.MAP_HEIGHT)
+		
+		if (rand_xpos >= cam_rect[0].x and rand_xpos <= cam_rect[1].x):
+			rand_xpos = randi_range(0, Globals.MAP_HEIGHT - vport.size.x)
+			if (rand_xpos >= cam_rect[0].x):
+				rand_xpos += vport.size.x
+		
+		spawnPosition = Vector2(rand_xpos, rand_ypos)
+		
+		#Create enemy
 		var newEnemy = enemy_scene.instantiate()
-		var spawnPosition = Vector2.ZERO
-		spawnPosition.x = get_viewport().size.x * int(c <= enemycount / 2) #Half spawn on left and right
-		spawnPosition.y = randi_range(0, get_viewport().size.y)
-		newEnemy.position = spawnPosition	
+		newEnemy.position = spawnPosition
 		
 		add_child(newEnemy)
 		c -= 1
+
+func getCameraBounds():
+	#Returns an array of 2 vectors: [0] x1y1 and [1] x2y2
+	var cam_centerpos = cam.get_screen_center_position()
+	var cam_x1y1 = Vector2(cam_centerpos.x - (vport.size.x / 2), cam_centerpos.y - (vport.size.y / 2))
+	var cam_x2y2 = Vector2(cam_centerpos.x + (vport.size.x / 2), cam_centerpos.y + (vport.size.y / 2))
+	var cam_rect = [cam_x1y1,cam_x2y2]
+	return cam_rect

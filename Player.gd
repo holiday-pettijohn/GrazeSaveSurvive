@@ -3,7 +3,7 @@ extends Entity
 signal hit
 signal death
 
-var screen_size
+var map_size
 var hp
 
 var alive
@@ -27,17 +27,19 @@ func start(start_position):
 	set_stats();
 	$PlayerSprite.animation = "idle"
 	$PlayerSprite.play()
-	show()
+	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
-	hide()
+	#Set camera bounds
+	$Camera2D.limit_top = 0
+	$Camera2D.limit_left = 0
+	$Camera2D.limit_right = Globals.MAP_WIDTH
+	$Camera2D.limit_bottom = Globals.MAP_HEIGHT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move(delta)
-
 	
 func move(delta):
 	#Process player movement
@@ -63,7 +65,7 @@ func move(delta):
 		
 		#Update player position
 		position += velocity * delta
-		position = position.clamp(Vector2.ZERO, screen_size) #Player cannot leave screen
+		position = position.clamp(Vector2.ZERO, Globals.MAP_SIZE) #Player cannot leave screen
 
 
 func _on_hurt_area_entered(area):

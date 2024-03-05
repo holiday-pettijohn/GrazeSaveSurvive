@@ -157,5 +157,9 @@ shape = SubResource("CircleShape2D_pfp8o")
 position = Vector2(27, -7.5)
 shape = SubResource("RectangleShape2D_o0mbq")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
 [connection signal="death" from="." to="." method="_on_death"]
 [connection signal="area_entered" from="Body" to="." method="_on_hurt_area_entered"]
