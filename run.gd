@@ -64,23 +64,19 @@ func updateWaveDisplay():
 
 func spawnWave():
 	#Spawn enemies
-	var enemycount = 4 + wave_count #More enemies spawn per wave
+	var enemycount = 1 + wave_count #More enemies spawn per wave
 	var c = enemycount
 	
 	while (c > 0):
 		#Get an offscreen spawn position
-		var spawnPosition
+		var cam_rect = getCameraBounds() #x1x2, x2y2
+		var rand_ypos = randi_range(0, Globals.MAP_HEIGHT) #Random y
 		
-		var cam_rect = getCameraBounds()
-		var rand_xpos = randi_range(0, Globals.MAP_WIDTH)
-		var rand_ypos = randi_range(0, Globals.MAP_HEIGHT)
+		var rand_xpos = randi_range(0, Globals.MAP_WIDTH  - vport.size.x) #Random x OUTSIDE CAMERA
+		if (rand_xpos >= cam_rect[0].x):
+			rand_xpos += vport.size.x
 		
-		if (rand_xpos >= cam_rect[0].x and rand_xpos <= cam_rect[1].x):
-			rand_xpos = randi_range(0, Globals.MAP_HEIGHT - vport.size.x)
-			if (rand_xpos >= cam_rect[0].x):
-				rand_xpos += vport.size.x
-		
-		spawnPosition = Vector2(rand_xpos, rand_ypos)
+		var spawnPosition = Vector2(rand_xpos, rand_ypos)
 		
 		#Create enemy
 		var newEnemy = enemy_scene.instantiate()
