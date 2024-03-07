@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfdyrsfp37nr4"
+path="res://.godot/imported/Cow Moo.mp3-f0f8cdff478fff77bcbfc6185c0b4b06.mp3str"
+
+[deps]
+
+source_file="res://sfx/Cow Moo.mp3"
+dest_files=["res://.godot/imported/Cow Moo.mp3-f0f8cdff478fff77bcbfc6185c0b4b06.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

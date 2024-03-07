@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Build music.mp3-e22d4a11f30e7032ca0e2a7396816
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=140.0
 beat_count=0
 bar_beats=4
