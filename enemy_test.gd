@@ -1,6 +1,5 @@
 extends Enemy
 
-@export var xp_scene : PackedScene
 var hp
 var velocity
 var move_left #TEMP FOR MOVEMENT TESTING
