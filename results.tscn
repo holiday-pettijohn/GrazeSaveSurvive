@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://brpm2kg82dhhe"]
+[gd_scene load_steps=4 format=3 uid="uid://brpm2kg82dhhe"]
 
+[ext_resource type="AudioStream" uid="uid://dddka6isnxc2e" path="res://music/Creepy ambient music.mp3" id="1_17eme"]
 [ext_resource type="Script" path="res://Results.gd" id="1_pdk4j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ygg25"]
 font_size = 32
 
 [node name="Results" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_17eme")
+autoplay = true
 
 [node name="Background" type="CanvasLayer" parent="."]
 
