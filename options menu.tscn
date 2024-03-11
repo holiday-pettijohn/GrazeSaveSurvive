@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://diin1cbx7aik1"]
+[gd_scene load_steps=3 format=3 uid="uid://diin1cbx7aik1"]
 
 [ext_resource type="Script" path="res://options_menu.gd" id="1_5v1ca"]
+[ext_resource type="PackedScene" uid="uid://dmc4wtywvud4y" path="res://BgMusic.tscn" id="2_he4bo"]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15
@@ -45,6 +46,8 @@ max_value = 2.08165e-12
 layout_mode = 2
 text = "Back"
 script = ExtResource("1_5v1ca")
+
+[node name="AudioStreamPlayer" parent="VBoxContainer" instance=ExtResource("2_he4bo")]
 
 [connection signal="value_changed" from="VBoxContainer/HSlider" to="VBoxContainer/Back" method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="VBoxContainer/Back" method="_on_back_pressed"]
