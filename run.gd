@@ -64,7 +64,7 @@ func updateWaveDisplay():
 
 func spawnWave():
 	#Spawn enemies
-	var enemycount = 1 + wave_count #More enemies spawn per wave
+	var enemycount = 4 + wave_count #More enemies spawn per wave
 	var c = enemycount
 	
 	while (c > 0):

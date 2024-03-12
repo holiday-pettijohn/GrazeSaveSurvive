@@ -14,11 +14,6 @@ func set_stats():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_stats()
-	
-	$Sprite.animation = "walk_right"
-	if (self.position.x > 0):
-		$Sprite.animation = "walk_left"
-	
 	start()
 
 func start():
@@ -36,14 +31,22 @@ func move(delta):
 	position += move_vector.normalized() * 0.05
 	
 func updateAnimation():
+	var prevFrame = $Sprite.get_frame()
+	var prevFrameProgress = $Sprite.get_frame_progress()
+	
 	var direction = move_vector.angle()
 	$Sprite.animation = "walk_right"
 	#Directions are WEIRD. Q1 and Q2 are negative. They go from 0 to PI, right to left.
 	if (abs(direction) > 0.5*PI):
 		$Sprite.animation = "walk_left"
-	#if (abs(direction) > ) Do look up and down
-	
-	#print(str(rad_to_deg(direction)))
+	if (abs(direction) > 0.4*PI and abs(direction) < 0.6*PI):
+		$Sprite.animation = "walk_down"
+		if (direction < 0):
+			$Sprite.animation = "walk_up"
+		
+	#Since changing animation resets the frame state, resume old state
+	$Sprite.frame = prevFrame
+	$Sprite.frame_progress = prevFrameProgress
 	
 func _on_body_entered(body):
 	hp -= 1
