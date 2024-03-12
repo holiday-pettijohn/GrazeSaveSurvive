@@ -4,9 +4,14 @@ signal hit
 signal death
 
 var map_size
-var hp
 
+var hp
 var alive
+var XP
+var MELEE_COOLDOWN = 1 #Seconds
+var RANGED_COOLDOWN = 1
+var mCooldownTimer
+var rCooldownTimer
 
 func set_stats():
 	#Player Stats (from parent)
@@ -16,11 +21,13 @@ func set_stats():
 	DMG_RANGED = 5
 	
 	#Player-specific stats
-	var XP = 0
+	XP = 0
 	
 	#Assigning values
 	hp = MAX_HP
 	alive = true
+	mCooldownTimer = 0
+	rCooldownTimer = 0
 
 func start(start_position):
 	position = start_position
@@ -40,6 +47,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move(delta)
+	process_actions(delta)
 	
 func move(delta):
 	#Process player movement
@@ -67,6 +75,18 @@ func move(delta):
 		position += velocity * delta
 		position = position.clamp(Vector2.ZERO, Globals.MAP_SIZE) #Player cannot leave screen
 
+func process_actions(delta):
+	rCooldownTimer = max(rCooldownTimer - delta, 0)
+	mCooldownTimer = max(mCooldownTimer - delta, 0)
+	
+	print("Cooldown: ", mCooldownTimer)
+	
+	if Input.is_action_pressed("ranged") and rCooldownTimer == 0:
+		rCooldownTimer = RANGED_COOLDOWN
+		print("Player: Ranged attack")
+	if Input.is_action_pressed("melee") and mCooldownTimer == 0:
+		mCooldownTimer = MELEE_COOLDOWN
+		print("Player: Melee attack")
 
 func _on_hurt_area_entered(area):
 	print(area, " entered!")
