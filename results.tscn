@@ -8,8 +8,9 @@ font_size = 32
 
 [node name="Results" type="Node2D"]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="DeathMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_17eme")
+volume_db = -6.0
 autoplay = true
 
 [node name="Background" type="CanvasLayer" parent="."]

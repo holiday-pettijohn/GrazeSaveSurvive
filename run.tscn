@@ -12,9 +12,9 @@
 script = ExtResource("1_ho1pr")
 enemy_scene = ExtResource("2_ta0op")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Lvl Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ajgw1")
-volume_db = -6.53
+volume_db = -11.275
 autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
