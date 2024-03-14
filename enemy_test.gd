@@ -4,12 +4,14 @@ var hp
 var velocity
 var move_left #TEMP FOR MOVEMENT TESTING
 
+var MELEE_DMG
+
 func set_stats():
 	MAX_HP = 5
 	SPEED = 100
 	xp = 1
 	
-	GROUP = 2
+	MELEE_DMG = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,7 +54,15 @@ func updateAnimation():
 		#$AnimatedSprite2D.stop()
 		#$AnimatedSprite2D.set_index
 	
-func _on_body_entered(body):
+	
+func _on_melee_area_entered(body):
+	body.get_parent().process_hit(MELEE_DMG)
+	
+func process_hit(dmg):
+	hp -= dmg
+	print("enemy took damage")
+	
+func _on_hurt_area_entered(body):
 	hp -= 1
 	
 	if (hp <= 0):

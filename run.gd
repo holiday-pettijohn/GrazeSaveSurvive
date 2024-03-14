@@ -11,7 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$HealthBar.value = $Player.hp
 
 func start_game():
 	$Player.start($StartPosition.position)
@@ -53,6 +53,9 @@ func updateWaveDisplay():
 
 	$WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
 	$WaveDisplay/displayWaveTime.text = text_mins + text_secs
+	
+	if !$Player.alive:
+		game_over()
 
 func spawnWave():
 	#Spawn enemies
