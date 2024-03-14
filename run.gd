@@ -3,6 +3,7 @@ extends Node
 @export var wave_count = 0
 var wave_duration : int
 var wave_timeleft : int
+var total_time : int
 @export var enemy_scene : PackedScene
 
 #Tracking the camera
@@ -30,14 +31,11 @@ func start_game():
 	
 func game_over():
 	$WaveTimer.stop()
-	$GameOverTimer.start()
 	$Results.show()
-	
-func _on_game_over_timer_timeout():
-	game_over()
 
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1
+	total_time += 1
 	
 	if (wave_timeleft <= 0):
 		spawnWave()
@@ -47,6 +45,7 @@ func _on_wave_timer_timeout():
 		wave_timeleft = wave_duration
 		
 	updateWaveDisplay()
+	updateGlobalTimeDisplay()
 
 func setWaveTimer():
 	wave_duration = (15*wave_count) + 5 #Waves get longer
@@ -93,3 +92,14 @@ func getCameraBounds():
 	var cam_x2y2 = Vector2(cam_centerpos.x + (vport.size.x / 2), cam_centerpos.y + (vport.size.y / 2))
 	var cam_rect = [cam_x1y1,cam_x2y2]
 	return cam_rect
+
+func updateGlobalTimeDisplay():
+	var text_secs = "0"
+	var text_mins = "" #The string will be populated if mins > 0
+	text_secs = str(total_time % 60) + "s"
+	
+	var mins = int(total_time / 60) #Truncated
+	if (mins > 0):
+		text_mins = str(mins) + "m"
+	$GlobalTimeDisplay/displayGlobalTime.text = text_mins + text_secs
+
