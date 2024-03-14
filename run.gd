@@ -31,7 +31,7 @@ func start_game():
 	
 func game_over():
 	$WaveTimer.stop()
-	$Results.show()
+	$ParallaxBackground/Results.show()
 
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1
@@ -59,8 +59,8 @@ func updateWaveDisplay():
 	if (mins > 0):
 		text_mins = str(mins) + "m"
 
-	$WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
-	$WaveDisplay/displayWaveTime.text = text_mins + text_secs
+	$ParallaxBackground/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
+	$ParallaxBackground/WaveDisplay/displayWaveTime.text = text_mins + text_secs
 
 func spawnWave():
 	#Spawn enemies
@@ -101,5 +101,5 @@ func updateGlobalTimeDisplay():
 	var mins = int(total_time / 60) #Truncated
 	if (mins > 0):
 		text_mins = str(mins) + "m"
-	$GlobalTimeDisplay/displayGlobalTime.text = text_mins + text_secs
+	$ParallaxBackground/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
 

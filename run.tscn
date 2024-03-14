@@ -27,14 +27,7 @@ offset_bottom = 648.0
 texture = ExtResource("1_66ckc")
 stretch_mode = 1
 
-[node name="Player" parent="." instance=ExtResource("2_7emnb")]
-
-[node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(576, 324)
-
-[node name="WaveTimer" type="Timer" parent="."]
-
-[node name="WaveDisplay" type="Control" parent="."]
+[node name="WaveDisplay" type="Control" parent="ParallaxBackground"]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -44,7 +37,7 @@ offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
-[node name="displayWaveCount" type="Label" parent="WaveDisplay"]
+[node name="displayWaveCount" type="Label" parent="ParallaxBackground/WaveDisplay"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -58,7 +51,7 @@ theme_override_font_sizes/font_size = 24
 text = "Wave 1"
 horizontal_alignment = 1
 
-[node name="displayWaveTime" type="Label" parent="WaveDisplay"]
+[node name="displayWaveTime" type="Label" parent="ParallaxBackground/WaveDisplay"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -72,6 +65,30 @@ theme_override_font_sizes/font_size = 20
 text = "00:00"
 horizontal_alignment = 1
 
+[node name="GlobalTimeDisplay" type="Control" parent="ParallaxBackground"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="displayGlobalTime" type="Label" parent="ParallaxBackground/GlobalTimeDisplay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "00:00"
+
+[node name="Results" parent="ParallaxBackground" instance=ExtResource("8_7ttu5")]
+
+[node name="Player" parent="." instance=ExtResource("2_7emnb")]
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="WaveTimer" type="Timer" parent="."]
+
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = 14.0
 offset_top = 17.0
@@ -83,20 +100,6 @@ offset_left = 641.0
 offset_top = 21.0
 offset_right = 776.0
 offset_bottom = 67.0
-
-[node name="GlobalTimeDisplay" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="displayGlobalTime" type="Label" parent="GlobalTimeDisplay"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "00:00"
-
-[node name="Results" parent="." instance=ExtResource("8_7ttu5")]
 
 [connection signal="death" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
