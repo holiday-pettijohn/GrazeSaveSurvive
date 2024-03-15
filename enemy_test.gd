@@ -8,7 +8,7 @@ func set_stats():
 	MAX_HP = 5
 	SPEED = 100
 	xp = 1
-	
+
 	GROUP = 2
 
 # Called when the node enters the scene tree for the first time.
@@ -28,12 +28,12 @@ func _process(delta):
 func move(delta):
 	#Move towards player
 	move_vector = get_parent().get_node("Player").position - position
-	position += move_vector.normalized() * 0.05
-	
+	position += move_vector.normalized() * 0.03
+
 func updateAnimation():
 	var prevFrame = $Sprite.get_frame()
 	var prevFrameProgress = $Sprite.get_frame_progress()
-	
+
 	var direction = move_vector.angle()
 	$Sprite.animation = "walk_right"
 	#Directions are WEIRD. Q1 and Q2 are negative. They go from 0 to PI, right to left.
@@ -43,14 +43,14 @@ func updateAnimation():
 		$Sprite.animation = "walk_down"
 		if (direction < 0):
 			$Sprite.animation = "walk_up"
-		
+
 	#Since changing animation resets the frame state, resume old state
 	$Sprite.frame = prevFrame
 	$Sprite.frame_progress = prevFrameProgress
-	
+
 func _on_body_entered(body):
 	hp -= 1
-	
+
 	if (hp <= 0):
 		#Drop XP on death - Move to main function
 		var i = xp
