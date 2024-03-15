@@ -11,7 +11,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$HealthBar.value = $Player.hp
+	$HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
+	$XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
 
 func start_game():
 	$Player.start($StartPosition.position)

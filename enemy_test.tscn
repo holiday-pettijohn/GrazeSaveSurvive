@@ -130,11 +130,15 @@ sprite_frames = SubResource("SpriteFrames_ygwdo")
 animation = &"walk_right"
 
 [node name="MeleeBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
 [node name="MeleeShape" type="CollisionShape2D" parent="MeleeBox"]
 shape = SubResource("CapsuleShape2D_jt3gu")
 
 [node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_37x6t")

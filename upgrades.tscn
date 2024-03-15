@@ -35,103 +35,103 @@ offset_right = 768.0
 offset_bottom = 353.0
 columns = 5
 
-[node name="tile1_1" type="ColorRect" parent="GridContainer"]
+[node name="tile1_1" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile1_2" type="ColorRect" parent="GridContainer"]
+[node name="tile1_2" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile1_3" type="ColorRect" parent="GridContainer"]
+[node name="tile1_3" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile1_4" type="ColorRect" parent="GridContainer"]
+[node name="tile1_4" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile1_5" type="ColorRect" parent="GridContainer"]
+[node name="tile1_5" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile2_1" type="ColorRect" parent="GridContainer"]
+[node name="tile2_1" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile2_2" type="ColorRect" parent="GridContainer"]
+[node name="tile2_2" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile2_3" type="ColorRect" parent="GridContainer"]
+[node name="tile2_3" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile2_4" type="ColorRect" parent="GridContainer"]
+[node name="tile2_4" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile2_5" type="ColorRect" parent="GridContainer"]
+[node name="tile2_5" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile3_1" type="ColorRect" parent="GridContainer"]
+[node name="tile3_1" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile3_2" type="ColorRect" parent="GridContainer"]
+[node name="tile3_2" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile3_3" type="ColorRect" parent="GridContainer"]
+[node name="tile3_3" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile3_4" type="ColorRect" parent="GridContainer"]
+[node name="tile3_4" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile3_5" type="ColorRect" parent="GridContainer"]
+[node name="tile3_5" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile4_1" type="ColorRect" parent="GridContainer"]
+[node name="tile4_1" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile4_2" type="ColorRect" parent="GridContainer"]
+[node name="tile4_2" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile4_3" type="ColorRect" parent="GridContainer"]
+[node name="tile4_3" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile4_4" type="ColorRect" parent="GridContainer"]
+[node name="tile4_4" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile4_5" type="ColorRect" parent="GridContainer"]
+[node name="tile4_5" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile5_1" type="ColorRect" parent="GridContainer"]
+[node name="tile5_1" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile5_2" type="ColorRect" parent="GridContainer"]
+[node name="tile5_2" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile5_3" type="ColorRect" parent="GridContainer"]
+[node name="tile5_3" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile5_4" type="ColorRect" parent="GridContainer"]
+[node name="tile5_4" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="tile5_5" type="ColorRect" parent="GridContainer"]
+[node name="tile5_5" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 

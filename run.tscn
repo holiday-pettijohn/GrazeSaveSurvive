@@ -84,7 +84,6 @@ offset_left = 64.0
 offset_top = 49.0
 offset_right = 128.0
 offset_bottom = 81.0
-max_value = 10.0
 value = 2.0
 texture_progress = ExtResource("6_i8agi")
 
@@ -93,6 +92,7 @@ offset_left = 694.0
 offset_top = 45.0
 offset_right = 758.0
 offset_bottom = 77.0
+value = 10.0
 texture_progress = ExtResource("7_05wt7")
 
 [node name="GlobalTimer" type="Timer" parent="."]

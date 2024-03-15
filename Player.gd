@@ -6,7 +6,15 @@ signal hit
 signal death
 
 var screen_size
+
 var hp
+var xp_mult
+var melee_atk
+var ranged_atk
+var defense
+
+var xp
+var level
 
 var alive
 
@@ -18,16 +26,19 @@ var velocity
 
 func set_stats():
 	#Player Stats (from parent)
-	MAX_HP = 10
+	MAX_HP = 5
 	SPEED = 300
-	DMG_CONTACT = 0
-	DMG_RANGED = 5
+	
+	melee_atk = 0
+	ranged_atk = 5
+	
+	level = 1
 	
 	ranged_cooldown = 0.4
 	current_ranged_cooldown = 0
 	
 	#Player-specific stats
-	var XP = 0
+	xp = 0
 	
 	#Assigning values
 	hp = MAX_HP
@@ -99,16 +110,34 @@ func ranged_attack():
 	if direction == -1:
 		firedBullet.position.x -= 2*$ProjectileOrigin.position.x
 	firedBullet.velocity = Vector2(direction*1000, 0)
+	firedBullet.DMG = ranged_atk
 	
 	add_sibling(firedBullet)
 
+
+func gain_xp(amount):
+	xp += amount
+	while xp >= level_threshold(level):
+		level_up()
+		
+func level_up():
+	xp -= level_threshold(level)
+	level += 1
+	melee_atk += 1
+	ranged_atk += 1
+	MAX_HP += 2
+	print(MAX_HP)
+	print(hp)
+	print(hp/MAX_HP)
+
+func level_threshold(lvl):
+	return lvl*5
+	
 func _on_death():
 	alive = false
 
 func _on_hit():
 	pass # Replace with function body.
-
-
 
 func game_over():
 	pass # Replace with function body.
