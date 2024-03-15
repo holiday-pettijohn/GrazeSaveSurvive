@@ -22,9 +22,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $Player.hp != null:
-		$HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
+		$ParallaxBackground/HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
 	if $Player.xp != null:
-		$XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
+		$ParallaxBackground/XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
 
 func start_game():
 	#Player starts in middle of screen
