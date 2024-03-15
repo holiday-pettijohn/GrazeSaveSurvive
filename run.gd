@@ -4,6 +4,8 @@ extends Node
 var wave_duration : int
 var wave_timeleft : int
 var total_time : int
+var game_started: bool
+
 @export var enemy_scene : PackedScene
 
 #Tracking the camera
@@ -15,10 +17,14 @@ func _ready():
 	vport = get_viewport()
 	cam = vport.get_camera_2d()
 	start_game()
+	game_started = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if $Player.hp != null:
+		$HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
+	if $Player.xp != null:
+		$XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
 
 func start_game():
 	#Player starts in middle of screen
@@ -28,7 +34,7 @@ func start_game():
 	wave_timeleft = wave_duration
 	updateWaveDisplay()
 	$WaveTimer.start()
-	
+
 func game_over():
 	$WaveTimer.stop()
 	$ParallaxBackground/Results.show()
@@ -36,25 +42,25 @@ func game_over():
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1
 	total_time += 1
-	
+
 	if (wave_timeleft <= 0):
 		spawnWave()
-		
+
 		wave_count += 1
 		setWaveTimer() #Reset timer
 		wave_timeleft = wave_duration
-		
+
 	updateWaveDisplay()
 	updateGlobalTimeDisplay()
 
 func setWaveTimer():
 	wave_duration = (15*wave_count) + 5 #Waves get longer
-	
+
 func updateWaveDisplay():
 	var text_secs = "0"
 	var text_mins = "" #The string will be populated if mins > 0
 	text_secs = str(wave_timeleft % 60) + "s"
-	
+
 	var mins = int(wave_timeleft / 60) #Truncated
 	if (mins > 0):
 		text_mins = str(mins) + "m"
@@ -62,26 +68,29 @@ func updateWaveDisplay():
 	$ParallaxBackground/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
 	$ParallaxBackground/WaveDisplay/displayWaveTime.text = text_mins + text_secs
 
+	if !$Player.alive:
+		game_over()
+
 func spawnWave():
 	#Spawn enemies
 	var enemycount = 4 + wave_count #More enemies spawn per wave
 	var c = enemycount
-	
+
 	while (c > 0):
 		#Get an offscreen spawn position
 		var cam_rect = getCameraBounds() #x1x2, x2y2
 		var rand_ypos = randi_range(0, Globals.MAP_HEIGHT) #Random y
-		
+
 		var rand_xpos = randi_range(0, Globals.MAP_WIDTH  - vport.size.x) #Random x OUTSIDE CAMERA
 		if (rand_xpos >= cam_rect[0].x):
 			rand_xpos += vport.size.x
-		
+
 		var spawnPosition = Vector2(rand_xpos, rand_ypos)
-		
+
 		#Create enemy
 		var newEnemy = enemy_scene.instantiate()
 		newEnemy.position = spawnPosition
-		
+
 		add_child(newEnemy)
 		c -= 1
 
@@ -97,7 +106,7 @@ func updateGlobalTimeDisplay():
 	var text_secs = "0"
 	var text_mins = "" #The string will be populated if mins > 0
 	text_secs = str(total_time % 60) + "s"
-	
+
 	var mins = int(total_time / 60) #Truncated
 	if (mins > 0):
 		text_mins = str(mins) + "m"

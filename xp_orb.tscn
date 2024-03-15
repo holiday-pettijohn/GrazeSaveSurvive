@@ -17,7 +17,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3urgt"]
 
 [node name="xpOrb" type="Area2D"]
-collision_layer = 2
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_5x7gh")
 
 [node name="XpSprite" type="AnimatedSprite2D" parent="."]
@@ -26,4 +27,4 @@ sprite_frames = SubResource("SpriteFrames_gvl1n")
 [node name="XpBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3urgt")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

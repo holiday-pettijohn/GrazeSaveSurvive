@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c54803c4ku3iv"]
+[gd_scene load_steps=9 format=3 uid="uid://c54803c4ku3iv"]
 
 [ext_resource type="Texture2D" uid="uid://drdnv41l2ddo4" path="res://art/grass.png" id="1_66ckc"]
 [ext_resource type="Script" path="res://run.gd" id="1_ho1pr"]
 [ext_resource type="PackedScene" uid="uid://b7yaqvhsdemge" path="res://player.tscn" id="2_7emnb"]
 [ext_resource type="PackedScene" uid="uid://0wrjgh8xuga7" path="res://enemy_test.tscn" id="2_ta0op"]
 [ext_resource type="AudioStream" uid="uid://55tsbmscdp44" path="res://music/Lvl 2 Music.mp3" id="3_ajgw1"]
+[ext_resource type="Texture2D" uid="uid://qeh3yxhc6nvj" path="res://art/enemy_walk.png" id="6_i8agi"]
+[ext_resource type="Texture2D" uid="uid://bwqggkcsw33e2" path="res://art/enemy_idle.png" id="7_05wt7"]
 [ext_resource type="PackedScene" uid="uid://brpm2kg82dhhe" path="res://results.tscn" id="8_7ttu5"]
 
 [node name="Main" type="Node"]
@@ -90,16 +92,20 @@ position = Vector2(576, 324)
 [node name="WaveTimer" type="Timer" parent="."]
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_left = 14.0
-offset_top = 17.0
-offset_right = 149.0
-offset_bottom = 63.0
+offset_left = 64.0
+offset_top = 49.0
+offset_right = 128.0
+offset_bottom = 81.0
+value = 2.0
+texture_progress = ExtResource("6_i8agi")
 
 [node name="XPBar" type="TextureProgressBar" parent="."]
-offset_left = 641.0
-offset_top = 21.0
-offset_right = 776.0
-offset_bottom = 67.0
+offset_left = 694.0
+offset_top = 45.0
+offset_right = 758.0
+offset_bottom = 77.0
+value = 10.0
+texture_progress = ExtResource("7_05wt7")
 
 [connection signal="death" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
