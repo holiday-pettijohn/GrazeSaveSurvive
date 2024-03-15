@@ -5,22 +5,27 @@ extends Entity
 signal hit
 signal death
 
+var map_size
 var screen_size
+var alive
+
+var level
 
 var hp
+var xp
+
 var xp_mult
+
 var melee_atk
 var ranged_atk
 var defense
 
-var xp
-var level
+var mCooldownTimer
+var rCooldownTimer
 
-var alive
-
-var ranged_cooldown
-
-var current_ranged_cooldown
+# Base melee and ranged cooldowns, in seconds
+var MELEE_COOLDOWN = 1
+var RANGED_COOLDOWN = 1
 
 var velocity
 
@@ -28,21 +33,17 @@ func set_stats():
 	#Player Stats (from parent)
 	MAX_HP = 5
 	SPEED = 300
-	
-	melee_atk = 0
-	ranged_atk = 5
-	
-	level = 1
-	
-	ranged_cooldown = 0.4
-	current_ranged_cooldown = 0
-	
-	#Player-specific stats
-	xp = 0
-	
+	# Base contact and ranged damage
+	DMG_CONTACT = 0
+	DMG_RANGED = 1
+
 	#Assigning values
+	level = 1
 	hp = MAX_HP
+	xp = 0
 	alive = true
+	mCooldownTimer = 0
+	rCooldownTimer = 0
 
 func start(start_position):
 	position = start_position
@@ -50,24 +51,21 @@ func start(start_position):
 	set_stats();
 	$PlayerSprite.animation = "idle"
 	$PlayerSprite.play()
-	show()
+	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
-	hide()
+	#Set camera bounds
+	$Camera2D.limit_top = 0
+	$Camera2D.limit_left = 0
+	$Camera2D.limit_right = Globals.MAP_WIDTH
+	$Camera2D.limit_bottom = Globals.MAP_HEIGHT
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move(delta)
+	process_actions(delta)
 	if (hp <= 0):
 		$PlayerSprite.animation = "death"
 		death.emit()
-	process_cooldowns(delta)
-	
-func process_cooldowns(delta):
-	if current_ranged_cooldown > 0:
-		current_ranged_cooldown -= delta
 
 func move(delta):
 	#Process player movement
@@ -81,24 +79,33 @@ func move(delta):
 			velocity.y += 1
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= 1
-			
-		if Input.is_action_pressed("ranged_attack") and current_ranged_cooldown <= 0:
-			current_ranged_cooldown = ranged_cooldown
-			ranged_attack()
-		
+
+
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * SPEED
 			$PlayerSprite.animation = "run"
 		else:
 			$PlayerSprite.animation = "idle"
-		
+
 		if velocity.x != 0:
 			$PlayerSprite.flip_h = velocity.x < 0
-		
+
 		#Update player position
 		position += velocity * delta
-		position = position.clamp(Vector2.ZERO, screen_size) #Player cannot leave screen
-	
+		position = position.clamp(Vector2.ZERO, Globals.MAP_SIZE) #Player cannot leave screen
+
+func process_actions(delta):
+	rCooldownTimer = max(rCooldownTimer - delta, 0)
+	mCooldownTimer = max(mCooldownTimer - delta, 0)
+
+	if Input.is_action_pressed("ranged") and rCooldownTimer == 0:
+		rCooldownTimer = RANGED_COOLDOWN
+		ranged_attack()
+		print("Player: Ranged attack")
+	if Input.is_action_pressed("melee") and mCooldownTimer == 0:
+		mCooldownTimer = MELEE_COOLDOWN
+		print("Player: Melee attack")
+
 func process_hit(dmg):
 	hp -= dmg
 	hit.emit()
@@ -110,8 +117,8 @@ func ranged_attack():
 	if direction == -1:
 		firedBullet.position.x -= 2*$ProjectileOrigin.position.x
 	firedBullet.velocity = Vector2(direction*1000, 0)
-	firedBullet.DMG = ranged_atk
-	
+	firedBullet.DMG = DMG_RANGED
+
 	add_sibling(firedBullet)
 
 
@@ -119,12 +126,12 @@ func gain_xp(amount):
 	xp += amount
 	while xp >= level_threshold(level):
 		level_up()
-		
+
 func level_up():
 	xp -= level_threshold(level)
 	level += 1
-	melee_atk += 1
-	ranged_atk += 1
+	DMG_CONTACT += 1
+	DMG_RANGED += 1
 	MAX_HP += 2
 	print(MAX_HP)
 	print(hp)
@@ -132,7 +139,7 @@ func level_up():
 
 func level_threshold(lvl):
 	return lvl*5
-	
+
 func _on_death():
 	alive = false
 

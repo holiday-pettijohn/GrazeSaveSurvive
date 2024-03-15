@@ -4,18 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://ca0ja0fqg2v20" path="res://xp_orb.tscn" id="3_w56c8"]
 [ext_resource type="Texture2D" uid="uid://dsyg0xyhmijoi" path="res://Green-Cap-Character-16x18.png" id="4_x2wp4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eempn"]
-atlas = ExtResource("4_x2wp4")
-region = Rect2(0, 18, 16, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yr7k1"]
-atlas = ExtResource("4_x2wp4")
-region = Rect2(16, 18, 16, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7b0kn"]
-atlas = ExtResource("4_x2wp4")
-region = Rect2(32, 18, 16, 18)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_g634f"]
 atlas = ExtResource("4_x2wp4")
 region = Rect2(0, 0, 16, 18)
@@ -52,22 +40,20 @@ region = Rect2(16, 54, 16, 18)
 atlas = ExtResource("4_x2wp4")
 region = Rect2(32, 54, 16, 18)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_eempn"]
+atlas = ExtResource("4_x2wp4")
+region = Rect2(0, 18, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr7k1"]
+atlas = ExtResource("4_x2wp4")
+region = Rect2(16, 18, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b0kn"]
+atlas = ExtResource("4_x2wp4")
+region = Rect2(32, 18, 16, 18)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ygwdo"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eempn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yr7k1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7b0kn")
-}],
-"loop": true,
-"name": &"walk_back",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g634f")
@@ -79,7 +65,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_rtxey")
 }],
 "loop": true,
-"name": &"walk_forward",
+"name": &"walk_down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -109,6 +95,20 @@ animations = [{
 "loop": true,
 "name": &"walk_right",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eempn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yr7k1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b0kn")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jt3gu"]
@@ -127,7 +127,7 @@ metadata/_edit_group_ = true
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ygwdo")
-animation = &"walk_right"
+animation = &"walk_up"
 
 [node name="MeleeBox" type="Area2D" parent="."]
 collision_layer = 8

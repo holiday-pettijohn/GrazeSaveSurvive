@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5tulfxd2e8c8"]
+[gd_scene load_steps=8 format=3 uid="uid://b5tulfxd2e8c8"]
 
 [ext_resource type="Script" path="res://QuitButton.gd" id="1_8vvve"]
 [ext_resource type="Script" path="res://StartRun.gd" id="1_digdb"]
 [ext_resource type="Script" path="res://Upgrades_Button.gd" id="1_xjpvx"]
 [ext_resource type="Script" path="res://Options_Button.gd" id="3_vm0k0"]
+[ext_resource type="PackedScene" uid="uid://dmc4wtywvud4y" path="res://BgMusic.tscn" id="5_obl1s"]
+[ext_resource type="AudioStream" uid="uid://l0l6dfh257oy" path="res://sfx/Mouse Hover.mp3" id="6_v5hbq"]
+[ext_resource type="AudioStream" uid="uid://jvb62dmiess7" path="res://sfx/Select.mp3" id="7_cmfmo"]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = -1
@@ -54,6 +57,16 @@ text = "Quit"
 script = ExtResource("1_8vvve")
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="BgMusic" parent="." instance=ExtResource("5_obl1s")]
+
+[node name="MouseHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_v5hbq")
+volume_db = -2.342
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_cmfmo")
+volume_db = -7.495
 
 [connection signal="pressed" from="VBoxContainer/Start Run Button" to="VBoxContainer/Start Run Button" method="_on_run_pressed"]
 [connection signal="pressed" from="VBoxContainer/Upgrades Button" to="VBoxContainer/Upgrades Button" method="_on_upgrades_pressed"]

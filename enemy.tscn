@@ -13,3 +13,6 @@ metadata/_edit_group_ = true
 [node name="Body" type="Area2D" parent="."]
 
 [node name="Hurtbox" type="CollisionShape2D" parent="Body"]
+
+[connection signal="body_entered" from="Body" to="." method="_on_body_body_entered"]
+[connection signal="body_exited" from="Body" to="." method="_on_body_body_exited"]
