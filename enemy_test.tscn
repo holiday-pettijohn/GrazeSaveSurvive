@@ -131,7 +131,7 @@ animation = &"walk_up"
 
 [node name="MeleeBox" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 4
 
 [node name="MeleeShape" type="CollisionShape2D" parent="MeleeBox"]
 shape = SubResource("CapsuleShape2D_jt3gu")

@@ -50,11 +50,11 @@ func updateAnimation():
 	$Sprite.frame = prevFrame
 	$Sprite.frame_progress = prevFrameProgress
 
-
 func _on_melee_area_entered(body):
 	body.get_parent().process_hit(MELEE_DMG)
 
 func process_hit(dmg):
+	print("Enemy takes damage!")
 	hp -= dmg
 	print(hp, dmg)
 
