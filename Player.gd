@@ -35,6 +35,14 @@ func start(start_position):
 	$PlayerSprite.animation = "idle"
 	$PlayerSprite.play()
 	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
+	
+	#Hide melee attack
+	$MeleeBody.hide()
+	$MeleeBody/MeleeBox.set_deferred("disabled", true)
+	
+	#Set melee duration
+	$MeleeBody/MeleeTimer.one_shot = true
+	$MeleeBody/MeleeTimer.wait_time = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -76,22 +84,22 @@ func move(delta):
 		position = position.clamp(Vector2.ZERO, Globals.MAP_SIZE) #Player cannot leave screen
 
 func process_actions(delta):
-	rCooldownTimer = max(rCooldownTimer - delta, 0)
+	#Update Cooldowns
+	rCooldownTimer = max(rCooldownTimer - delta, 0) #Delta is measured in seconds
 	mCooldownTimer = max(mCooldownTimer - delta, 0)
-	
-	print("Cooldown: ", mCooldownTimer)
 	
 	if Input.is_action_pressed("ranged") and rCooldownTimer == 0:
 		rCooldownTimer = RANGED_COOLDOWN
-		print("Player: Ranged attack")
 	if Input.is_action_pressed("melee") and mCooldownTimer == 0:
 		mCooldownTimer = MELEE_COOLDOWN
-		print("Player: Melee attack")
+		#Melee collision box
+		$MeleeBody.show()
+		$MeleeBody/MeleeBox.set_deferred("disabled", false)
 
 func _on_hurt_area_entered(area):
 	print(area, " entered!")
-	print(area.get_parent().GROUP)
-	print(hp)
+	print("Parent group:", area.get_parent().GROUP)
+	print("HP: ", hp)
 	if area.get_parent().GROUP == 2:
 		hp -= 1
 		hit.emit()

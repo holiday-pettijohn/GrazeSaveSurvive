@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://b7yaqvhsdemge"]
+[gd_scene load_steps=24 format=3 uid="uid://b7yaqvhsdemge"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rhtgq"]
 [ext_resource type="Texture2D" uid="uid://cirdphg3y2eyp" path="res://art/cow_oga.png" id="2_d3wot"]
 [ext_resource type="Texture2D" uid="uid://dvb6rn5vc0lo8" path="res://art/player_death.png" id="2_v54db"]
+[ext_resource type="Texture2D" uid="uid://ds48nfx10kvus" path="res://art/attack_melee.png" id="4_q63jk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gupks"]
 radius = 6.08276
@@ -132,6 +133,17 @@ radius = 43.0116
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0mbq"]
 size = Vector2(79, 35)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_dwinn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q63jk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_rhtgq")
 metadata/_edit_group_ = true
@@ -156,6 +168,11 @@ shape = SubResource("CircleShape2D_pfp8o")
 [node name="MeleeBox" type="CollisionShape2D" parent="MeleeBody"]
 position = Vector2(29.5, -7.5)
 shape = SubResource("RectangleShape2D_o0mbq")
+
+[node name="MeleeSprite" type="AnimatedSprite2D" parent="MeleeBody"]
+sprite_frames = SubResource("SpriteFrames_dwinn")
+
+[node name="MeleeTimer" type="Timer" parent="MeleeBody"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
