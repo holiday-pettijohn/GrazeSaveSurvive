@@ -73,7 +73,7 @@ func process_hit(dmg):
 	if (hp <= 0):
 		#Drop XP on death - Move to main function
 		var i = xp
-		while (i >= 0):
+		while (i > 0):
 			var newXpOrb = xp_scene.instantiate()
 			newXpOrb.global_position  = self.global_position
 			add_sibling(newXpOrb)# - Must move this to the main function!

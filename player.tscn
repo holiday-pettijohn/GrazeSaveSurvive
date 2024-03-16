@@ -186,7 +186,6 @@ sprite_frames = SubResource("SpriteFrames_f1xgw")
 [node name="MeleeDuration" type="Timer" parent="MeleeBody"]
 
 [node name="ProjectileOrigin" type="Node2D" parent="."]
-position = Vector2(35, -16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

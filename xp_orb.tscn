@@ -22,6 +22,7 @@ collision_mask = 4
 script = ExtResource("1_5x7gh")
 
 [node name="XpSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_gvl1n")
 
 [node name="XpBox" type="CollisionShape2D" parent="."]
