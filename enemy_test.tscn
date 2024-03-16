@@ -127,7 +127,7 @@ metadata/_edit_group_ = true
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ygwdo")
-animation = &"walk_up"
+animation = &"walk_left"
 
 [node name="MeleeBox" type="Area2D" parent="."]
 collision_layer = 8
@@ -144,3 +144,4 @@ collision_mask = 2
 shape = SubResource("CapsuleShape2D_37x6t")
 
 [connection signal="area_entered" from="MeleeBox" to="." method="_on_melee_area_entered"]
+[connection signal="area_exited" from="MeleeBox" to="." method="_on_melee_box_area_exited"]

@@ -22,9 +22,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $Player.hp != null:
-		$ParallaxBackground/HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
+		$UI/HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
 	if $Player.xp != null:
-		$ParallaxBackground/XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
+		$UI/XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
 
 func start_game():
 	#Player starts in middle of screen
@@ -37,7 +37,7 @@ func start_game():
 
 func game_over():
 	$WaveTimer.stop()
-	$ParallaxBackground/Results.show()
+	$UI/Results.show()
 
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1
@@ -65,8 +65,8 @@ func updateWaveDisplay():
 	if (mins > 0):
 		text_mins = str(mins) + "m"
 
-	$ParallaxBackground/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
-	$ParallaxBackground/WaveDisplay/displayWaveTime.text = text_mins + text_secs
+	$UI/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
+	$UI/WaveDisplay/displayWaveTime.text = text_mins + text_secs
 
 	if !$Player.alive:
 		game_over()
@@ -110,5 +110,5 @@ func updateGlobalTimeDisplay():
 	var mins = int(total_time / 60) #Truncated
 	if (mins > 0):
 		text_mins = str(mins) + "m"
-	$ParallaxBackground/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
+	$UI/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
 

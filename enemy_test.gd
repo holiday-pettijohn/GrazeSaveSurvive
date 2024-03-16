@@ -5,10 +5,11 @@ var velocity
 var move_vector
 
 var MELEE_DMG
+var isContactingPlayer
 
 func set_stats():
 	MAX_HP = 2
-	SPEED = 100
+	SPEED = 50
 	xp = 1
 
 	MELEE_DMG = 1
@@ -21,16 +22,23 @@ func _ready():
 func start():
 	$Sprite.play()
 	hp = MAX_HP
+	isContactingPlayer = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (get_parent().get_node("Player").alive == false) or (isContactingPlayer):
+		$Sprite.stop() #Idle
+		$Sprite.frame = 0
+		return
+	
+	$Sprite.play()
 	move(delta)
 	updateAnimation()
 
 func move(delta):
 	#Move towards player
 	move_vector = get_parent().get_node("Player").position - position
-	position += move_vector.normalized() * 0.03
+	position += move_vector.normalized() * SPEED * delta
 
 func updateAnimation():
 	var prevFrame = $Sprite.get_frame()
@@ -51,7 +59,11 @@ func updateAnimation():
 	$Sprite.frame_progress = prevFrameProgress
 
 func _on_melee_area_entered(body):
+	isContactingPlayer = true
 	body.get_parent().process_hit(MELEE_DMG)
+
+func _on_melee_box_area_exited(area):
+	isContactingPlayer = false
 
 func process_hit(dmg):
 	print("Enemy takes damage!")
@@ -67,5 +79,3 @@ func process_hit(dmg):
 			add_sibling(newXpOrb)# - Must move this to the main function!
 			i -= 1
 		queue_free()
-
-
