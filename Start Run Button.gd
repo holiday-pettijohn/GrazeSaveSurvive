@@ -1,6 +1,4 @@
-extends Area2D
-
-var amount = 1
+extends Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +8,5 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_area_entered(area):
-	area.get_parent().gain_xp(amount)
-	queue_free() #Get consumed
+func _on_pressed():
+	get_tree().change_scene_to_file("res://base_scene.tscn") #Start run

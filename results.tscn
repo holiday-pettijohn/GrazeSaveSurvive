@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://dddka6isnxc2e" path="res://music/Creepy ambient music.mp3" id="1_17eme"]
 [ext_resource type="Texture2D" uid="uid://cvaccgarim485" path="res://art/dark.png" id="1_t4fvk"]
-[ext_resource type="Script" path="res://results.gd" id="1_u3xy4"]
+[ext_resource type="Script" path="res://Results.gd" id="1_u3xy4"]
 [ext_resource type="Texture2D" uid="uid://bcqb4aptyubg2" path="res://art/results_menu_button.png" id="2_t2aoq"]
 [ext_resource type="Texture2D" uid="uid://cpy5vdbijhkj6" path="res://art/results_banner.png" id="3_wsm5q"]
 [ext_resource type="Script" path="res://results_menu_button.gd" id="5_orp3a"]
