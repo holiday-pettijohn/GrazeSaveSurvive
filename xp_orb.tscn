@@ -18,7 +18,7 @@ animations = [{
 
 [node name="xpOrb" type="Area2D"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 2
 script = ExtResource("1_5x7gh")
 
 [node name="XpSprite" type="AnimatedSprite2D" parent="."]

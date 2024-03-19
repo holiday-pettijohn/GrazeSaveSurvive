@@ -31,7 +31,7 @@ script = ExtResource("1_13ofq")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 8
 
 [node name="Shape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_yxlyr")

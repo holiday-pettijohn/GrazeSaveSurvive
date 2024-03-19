@@ -165,8 +165,8 @@ metadata/hurtbox = true
 shape = SubResource("CircleShape2D_gupks")
 
 [node name="PickupBody" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 2
+collision_mask = 2
 
 [node name="PickupBox" type="CollisionShape2D" parent="PickupBody"]
 shape = SubResource("CircleShape2D_pfp8o")
