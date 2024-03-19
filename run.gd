@@ -22,9 +22,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $Player.hp != null:
-		$HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
+		$UI/HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
 	if $Player.xp != null:
-		$XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
+		$UI/XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
 
 func start_game():
 	#Player starts in middle of screen
@@ -37,7 +37,7 @@ func start_game():
 
 func game_over():
 	$WaveTimer.stop()
-	$ParallaxBackground/Results.show()
+	$UI/Results.show()
 
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1
@@ -54,7 +54,7 @@ func _on_wave_timer_timeout():
 	updateGlobalTimeDisplay()
 
 func setWaveTimer():
-	wave_duration = 15#(15*wave_count) + 5 #Waves get longer
+	wave_duration = 15#(15*wave_count) + 5 #Waves (don't) get longer
 
 func updateWaveDisplay():
 	var text_secs = "0"
@@ -65,15 +65,17 @@ func updateWaveDisplay():
 	if (mins > 0):
 		text_mins = str(mins) + "m"
 
-	$ParallaxBackground/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
-	$ParallaxBackground/WaveDisplay/displayWaveTime.text = text_mins + text_secs
+	$UI/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
+	$UI/WaveDisplay/displayWaveTime.text = text_mins + text_secs
 
 	if !$Player.alive:
 		game_over()
 
 func spawnWave():
 	#Spawn enemies
-	var enemycount = 10 + wave_count**3 #More enemies spawn per wave
+	var enemycount = 10 + wave_count**3 #Funny enemy scaling go brr
+	# In all seriousness, this does highlight an issue with no enemy collision
+	# What should we do about this?
 	var c = enemycount
 
 	while (c > 0):
@@ -110,5 +112,5 @@ func updateGlobalTimeDisplay():
 	var mins = int(total_time / 60) #Truncated
 	if (mins > 0):
 		text_mins = str(mins) + "m"
-	$ParallaxBackground/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
+	$UI/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
 

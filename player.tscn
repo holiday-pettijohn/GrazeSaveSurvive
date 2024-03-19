@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://b7yaqvhsdemge"]
+[gd_scene load_steps=26 format=3 uid="uid://b7yaqvhsdemge"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rhtgq"]
 [ext_resource type="Texture2D" uid="uid://cirdphg3y2eyp" path="res://art/cow_oga.png" id="2_d3wot"]
 [ext_resource type="PackedScene" uid="uid://cy6oacass3itf" path="res://projectile.tscn" id="2_tjf4v"]
 [ext_resource type="Texture2D" uid="uid://dvb6rn5vc0lo8" path="res://art/player_death.png" id="2_v54db"]
 [ext_resource type="Script" path="res://player_hitbox.gd" id="5_k2c8u"]
+[ext_resource type="Texture2D" uid="uid://ds48nfx10kvus" path="res://art/attack_melee.png" id="6_kr4kq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwlj7"]
 atlas = ExtResource("2_d3wot")
@@ -132,7 +133,18 @@ radius = 6.08276
 radius = 43.0116
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0mbq"]
-size = Vector2(79, 35)
+size = Vector2(57.105, 73)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f1xgw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_kr4kq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_rhtgq")
@@ -144,6 +156,8 @@ sprite_frames = SubResource("SpriteFrames_vyj4h")
 animation = &"idle"
 
 [node name="Body" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 9
 script = ExtResource("5_k2c8u")
 metadata/hurtbox = true
 
@@ -152,21 +166,26 @@ shape = SubResource("CircleShape2D_gupks")
 
 [node name="PickupBody" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 0
 
 [node name="PickupBox" type="CollisionShape2D" parent="PickupBody"]
 shape = SubResource("CircleShape2D_pfp8o")
 
 [node name="MeleeBody" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 16
+collision_mask = 16
 
 [node name="MeleeBox" type="CollisionShape2D" parent="MeleeBody"]
-position = Vector2(29.5, -7.5)
 shape = SubResource("RectangleShape2D_o0mbq")
 
+[node name="MeleeSprite" type="AnimatedSprite2D" parent="MeleeBody"]
+position = Vector2(0, 2)
+scale = Vector2(1, 1.875)
+sprite_frames = SubResource("SpriteFrames_f1xgw")
+
+[node name="MeleeDuration" type="Timer" parent="MeleeBody"]
+
 [node name="ProjectileOrigin" type="Node2D" parent="."]
-position = Vector2(35, -16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -174,3 +193,5 @@ position_smoothing_speed = 20.0
 
 [connection signal="death" from="." to="." method="_on_death"]
 [connection signal="area_entered" from="Body" to="." method="_on_hurt_area_entered"]
+[connection signal="area_entered" from="MeleeBody" to="." method="_on_melee_body_area_entered"]
+[connection signal="timeout" from="MeleeBody/MeleeDuration" to="." method="_on_melee_duration_timeout"]

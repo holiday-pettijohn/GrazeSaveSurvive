@@ -6,7 +6,7 @@ var DMG = 1
 var lifetime = 1
 var acceleration = Vector2(0, 0)
 var velocity = Vector2(0, 0)
-var pierces = 1
+var pierces = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

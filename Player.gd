@@ -16,8 +16,8 @@ var xp
 
 var xp_mult
 
-var melee_atk
-var ranged_atk
+var MELEE_RANGE
+var DMG_MELEE
 var defense
 
 var mCooldownTimer
@@ -30,6 +30,8 @@ var RANGED_COOLDOWN = 1
 var velocity
 
 func set_stats():
+	alive = true
+	
 	#Player Stats (from parent)
 	MAX_HP = 5
 	SPEED = 300
@@ -41,8 +43,11 @@ func set_stats():
 	level = 1
 	hp = MAX_HP
 	xp = 0
-	alive = true
+	
+	#Attack Stats
 	mCooldownTimer = 0
+	MELEE_RANGE = 64 #Melee collision box x-offset from player
+	DMG_MELEE = 1
 	rCooldownTimer = 0
 
 func start(start_position):
@@ -52,6 +57,9 @@ func start(start_position):
 	$PlayerSprite.animation = "idle"
 	$PlayerSprite.play()
 	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
+	
+	#Attacks
+	melee_hide() #Hide collision box
 
 func _ready():
 	#Set camera bounds
@@ -61,11 +69,13 @@ func _ready():
 	$Camera2D.limit_bottom = Globals.MAP_HEIGHT
 
 func _process(delta):
-	move(delta)
-	process_actions(delta)
 	if (hp <= 0):
 		$PlayerSprite.animation = "death"
 		death.emit()
+		return
+
+	move(delta)
+	process_actions(delta)
 
 func move(delta):
 	#Process player movement
@@ -101,10 +111,9 @@ func process_actions(delta):
 	if Input.is_action_pressed("ranged") and rCooldownTimer == 0:
 		rCooldownTimer = RANGED_COOLDOWN
 		ranged_attack()
-		print("Player: Ranged attack")
 	if Input.is_action_pressed("melee") and mCooldownTimer == 0:
 		mCooldownTimer = MELEE_COOLDOWN
-		print("Player: Melee attack")
+		melee_attack()
 
 func process_hit(dmg):
 	hp -= dmg
@@ -121,6 +130,27 @@ func ranged_attack():
 
 	add_sibling(firedBullet)
 
+############## MELEE ATTACK FUNCTIONS ##############
+func melee_attack():
+	$MeleeBody.show()
+	$MeleeBody/MeleeBox.set_deferred("disabled", false)
+	$MeleeBody.position.x = MELEE_RANGE * (-1 ** int($PlayerSprite.flip_h))
+	$MeleeBody/MeleeSprite.flip_h = $PlayerSprite.flip_h
+	
+	#Set timer for melee duration
+	$MeleeBody/MeleeDuration.one_shot = true
+	$MeleeBody/MeleeDuration.wait_time = 0.2 #Time an attack stays on screen
+	$MeleeBody/MeleeDuration.start()
+
+func melee_hide():
+	$MeleeBody.hide()
+	$MeleeBody/MeleeBox.set_deferred("disabled", true)
+	$MeleeBody.position.x = 0 #Reset to player position
+	
+func _on_melee_duration_timeout():
+	melee_hide()
+	
+######################################################
 
 func gain_xp(amount):
 	xp += amount
@@ -142,9 +172,14 @@ func level_threshold(lvl):
 
 func _on_death():
 	alive = false
+	$PickupBody/PickupBox.set_deferred("disabled", true) #Disable pickups
 
 func _on_hit():
 	pass # Replace with function body.
 
 func game_over():
 	pass # Replace with function body.
+
+
+func _on_melee_body_area_entered(body):
+	body.get_parent().process_hit(DMG_MELEE)
