@@ -2,6 +2,7 @@ extends Entity #Inherit from Entity class
 class_name Enemy
 
 @export var xp_scene : PackedScene
+@export var tile : PackedScene
 
 @export var xp = 0
 signal hit

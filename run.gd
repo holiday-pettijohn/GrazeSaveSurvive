@@ -54,7 +54,7 @@ func _on_wave_timer_timeout():
 	updateGlobalTimeDisplay()
 
 func setWaveTimer():
-	wave_duration = (15*wave_count) + 5 #Waves get longer
+	wave_duration = 15#(15*wave_count) + 5 #Waves get longer
 
 func updateWaveDisplay():
 	var text_secs = "0"
@@ -73,7 +73,7 @@ func updateWaveDisplay():
 
 func spawnWave():
 	#Spawn enemies
-	var enemycount = 4 + wave_count #More enemies spawn per wave
+	var enemycount = 10 + wave_count**3 #More enemies spawn per wave
 	var c = enemycount
 
 	while (c > 0):

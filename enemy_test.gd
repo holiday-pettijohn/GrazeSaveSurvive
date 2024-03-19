@@ -30,7 +30,7 @@ func _process(delta):
 func move(delta):
 	#Move towards player
 	move_vector = get_parent().get_node("Player").position - position
-	position += move_vector.normalized() * 0.03
+	position += move_vector.normalized() * delta * SPEED
 
 func updateAnimation():
 	var prevFrame = $Sprite.get_frame()
