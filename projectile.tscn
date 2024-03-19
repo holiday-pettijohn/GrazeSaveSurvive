@@ -27,6 +27,7 @@ animations = [{
 }]
 
 [node name="Projectile" type="Node2D"]
+z_index = -1
 script = ExtResource("1_13ofq")
 
 [node name="Hitbox" type="Area2D" parent="."]
