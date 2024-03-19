@@ -16,3 +16,8 @@ func _process(_delta):
 	if (Input.is_key_pressed(KEY_R)):
 		_on_run_pressed()
 
+
+
+func _on_mouse_entered():
+	$"../../MouseHover"
+	pass # Replace with function body.
