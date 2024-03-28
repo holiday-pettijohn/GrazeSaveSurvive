@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://v6dic6r8xqsf"]
+[gd_scene load_steps=4 format=3 uid="uid://v6dic6r8xqsf"]
 
 [ext_resource type="PackedScene" uid="uid://ca0ja0fqg2v20" path="res://xp_orb.tscn" id="2_8eejj"]
 [ext_resource type="Script" path="res://enemy.gd" id="2_oysp5"]
+[ext_resource type="PackedScene" uid="uid://dhmd17xaaygxf" path="res://tile.tscn" id="3_5dqsa"]
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("2_oysp5")
 xp_scene = ExtResource("2_8eejj")
+tile = ExtResource("3_5dqsa")
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

@@ -127,18 +127,17 @@ metadata/_edit_group_ = true
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ygwdo")
-animation = &"walk_left"
+animation = &"walk_up"
 
 [node name="MeleeBox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 4
+collision_layer = 0
 
 [node name="MeleeShape" type="CollisionShape2D" parent="MeleeBox"]
 shape = SubResource("CapsuleShape2D_jt3gu")
 
 [node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 18
+collision_mask = 0
 
 [node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_37x6t")

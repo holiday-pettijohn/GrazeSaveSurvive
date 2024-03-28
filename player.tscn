@@ -156,8 +156,8 @@ sprite_frames = SubResource("SpriteFrames_vyj4h")
 animation = &"idle"
 
 [node name="Body" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 8
+collision_layer = 0
+collision_mask = 9
 script = ExtResource("5_k2c8u")
 metadata/hurtbox = true
 
@@ -166,14 +166,14 @@ shape = SubResource("CircleShape2D_gupks")
 
 [node name="PickupBody" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 0
 
 [node name="PickupBox" type="CollisionShape2D" parent="PickupBody"]
 shape = SubResource("CircleShape2D_pfp8o")
 
 [node name="MeleeBody" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
+collision_layer = 16
+collision_mask = 16
 
 [node name="MeleeBox" type="CollisionShape2D" parent="MeleeBody"]
 shape = SubResource("RectangleShape2D_o0mbq")

@@ -54,7 +54,7 @@ func _on_wave_timer_timeout():
 	updateGlobalTimeDisplay()
 
 func setWaveTimer():
-	wave_duration = (10 * wave_count) + 5 #Waves get longer
+	wave_duration = 15#(15*wave_count) + 5 #Waves (don't) get longer
 
 func updateWaveDisplay():
 	var text_secs = "0"
@@ -73,7 +73,9 @@ func updateWaveDisplay():
 
 func spawnWave():
 	#Spawn enemies
-	var enemycount = 4 * (1 + wave_count) #More enemies spawn per wave
+	var enemycount = 10 + wave_count**3 #Funny enemy scaling go brr
+	# In all seriousness, this does highlight an issue with no enemy collision
+	# What should we do about this?
 	var c = enemycount
 
 	while (c > 0):
