@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca0ja0fqg2v20"]
+[gd_scene load_steps=5 format=3 uid="uid://ca0ja0fqg2v20"]
 
 [ext_resource type="Script" path="res://xp_orb.gd" id="1_5x7gh"]
 [ext_resource type="Texture2D" uid="uid://b4upgho2bnn1e" path="res://art/xp_orb.png" id="2_ad78t"]
-[ext_resource type="AudioStream" uid="uid://cpmvyot2x4524" path="res://sfx/Item pickup.mp3" id="3_4tcll"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gvl1n"]
 animations = [{
@@ -29,9 +28,5 @@ sprite_frames = SubResource("SpriteFrames_gvl1n")
 
 [node name="XpBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3urgt")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_4tcll")
-volume_db = -3.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

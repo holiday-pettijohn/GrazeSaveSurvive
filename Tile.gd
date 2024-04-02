@@ -11,6 +11,8 @@ var tile_objects = Array()
 
 var stat_bonuses = {}
 
+var color = Color()
+
 # TODO: Move this to globals
 var bonus_distribution = {
 	"RANGE_ATK": 10,
@@ -50,19 +52,21 @@ func _ready():
 func generate_random():
 	generate_random_tiles()
 	generate_random_stats()
+	color = Color(randf(), randf(), randf())
 	render_tiles()
 	
 func generate_random_tiles():
 	sub_tiles.push_back(Vector2i(0, 0))
 	# 1: 0-16, 2: 17:23, 3: 24:29, 4:30:31, 5: 32
 	num_subtiles = randi() % 32
-	if num_subtiles in range(0, 16):
+	print(num_subtiles)
+	if 0 <= num_subtiles and num_subtiles < 16:
 		num_subtiles = 1
-	elif num_subtiles in range(16, 24):
+	elif 16 <= num_subtiles and num_subtiles < 24:
 		num_subtiles = 2
-	elif num_subtiles in range(24, 30):
+	elif 24 <= num_subtiles and num_subtiles < 30:
 		num_subtiles = 3
-	elif num_subtiles in range(30, 31):
+	elif 30 <= num_subtiles and num_subtiles < 32:
 		num_subtiles = 4
 	elif num_subtiles == 32:
 		num_subtiles = 5
@@ -70,7 +74,7 @@ func generate_random_tiles():
 		num_subtiles = 1
 		
 	if num_subtiles != 1:
-		for i in range(2, num_subtiles):
+		for i in range(1, num_subtiles):
 			var selections = Array()
 			for t in sub_tiles:
 				for d in [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]:
@@ -83,11 +87,11 @@ func generate_random_stats():
 	#Base stat total randomly deviates +-15%
 	stat_total = (num_subtiles*10 + pow(num_subtiles, 1.5))*(.85+(randi()%30)/100)
 	num_stats = randi() % num_subtiles
-	if num_stats in range(0, 2):
+	if 0 <= num_stats and num_stats < 2:
 		num_stats = 1
-	elif num_stats in range(2, 4):
+	elif 2 <= num_stats and num_stats < 4:
 		num_stats = 2
-	elif num_stats in range(4, 5):
+	elif 4 <= num_stats and num_stats <= 5:
 		num_stats = 3
 	#TODO: add code to implement
 	#Get sum of bonus_distribution and assign stats based on that
@@ -126,10 +130,15 @@ func generate_random_stats():
 	
 func render_tiles():
 	for t in sub_tiles:
-		var tile_rect = $BaseRect.instantiate()
+		var tile_rect = ColorRect.new()
 		tile_rect.position = Vector2(t[0]*tile_offset[0], t[1]*tile_offset[1])
+		tile_rect.color = color
+		tile_rect.custom_minimum_size.x = 40
+		tile_rect.custom_minimum_size.y = 40
 		tile_rect.visible = true
-		tile_objects.push_back(tile_rect)
+		print(tile_rect.position)
+		add_child(tile_rect)
+		#tile_objects.push_back(tile_rect)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

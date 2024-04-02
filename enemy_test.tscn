@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://0wrjgh8xuga7"]
+[gd_scene load_steps=20 format=3 uid="uid://0wrjgh8xuga7"]
 
 [ext_resource type="Script" path="res://enemy_test.gd" id="2_ejrwe"]
+[ext_resource type="PackedScene" uid="uid://dhmd17xaaygxf" path="res://tile.tscn" id="3_pw6tn"]
 [ext_resource type="PackedScene" uid="uid://ca0ja0fqg2v20" path="res://xp_orb.tscn" id="3_w56c8"]
 [ext_resource type="Texture2D" uid="uid://dsyg0xyhmijoi" path="res://Green-Cap-Character-16x18.png" id="4_x2wp4"]
 
@@ -122,6 +123,7 @@ height = 76.0
 [node name="enemy_test" type="Node2D" groups=["enemy"]]
 script = ExtResource("2_ejrwe")
 xp_scene = ExtResource("3_w56c8")
+tile = ExtResource("3_pw6tn")
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

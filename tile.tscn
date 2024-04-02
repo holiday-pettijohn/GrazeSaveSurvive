@@ -6,7 +6,6 @@
 script = ExtResource("1_cx7p8")
 
 [node name="BaseRect" type="ColorRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(40, 40)
 offset_right = 40.0
 offset_bottom = 40.0
