@@ -9,6 +9,11 @@ var game_started: bool
 @export var enemy_melee_scene : PackedScene
 @export var enemy_ranged_scene : PackedScene
 
+@onready var lvl1music = $"Lvl1Music"
+@onready var lvl2music = $"Lvl2Music"
+@onready var bossBuildTune = $"Boss BuildupMusic"
+@onready var deathmusic = $"DeathMusic"
+
 #Tracking the camera
 var vport; var cam
 
@@ -35,10 +40,13 @@ func start_game():
 	wave_timeleft = wave_duration
 	updateWaveDisplay()
 	$WaveTimer.start()
+	lvl1music.play()
 
 func game_over():
+	lvl1music.stop()
 	$WaveTimer.stop()
 	$UI/Results.show()
+	deathmusic.play()
 
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1

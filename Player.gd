@@ -29,6 +29,10 @@ var RANGED_COOLDOWN = 1
 
 var velocity
 
+@onready var hitSound = $"Hit SFX"
+@onready var pickupSFX = $"Pickup SFX"
+@onready var hurtSFX = $"HurtSound"
+
 func set_stats():
 	alive = true
 	
@@ -127,7 +131,8 @@ func ranged_attack():
 		firedBullet.position.x -= 2*$ProjectileOrigin.position.x
 	firedBullet.velocity = Vector2(direction*1000, 0)
 	firedBullet.DMG = DMG_RANGED
-
+	
+	hitSound.play()
 	add_sibling(firedBullet)
 
 ############## MELEE ATTACK FUNCTIONS ##############
@@ -141,6 +146,10 @@ func melee_attack():
 	$MeleeBody/MeleeDuration.one_shot = true
 	$MeleeBody/MeleeDuration.wait_time = 0.2 #Time an attack stays on screen
 	$MeleeBody/MeleeDuration.start()
+	
+	hitSound.play()
+	
+
 
 func melee_hide():
 	$MeleeBody.hide()
@@ -166,6 +175,7 @@ func level_up():
 	print(MAX_HP)
 	print(hp)
 	print(hp/MAX_HP)
+	pickupSFX.play()
 
 func level_threshold(lvl):
 	return lvl*5
@@ -182,4 +192,5 @@ func game_over():
 
 
 func _on_melee_body_area_entered(body):
+	hurtSFX.play()
 	body.get_parent().process_hit(DMG_MELEE)

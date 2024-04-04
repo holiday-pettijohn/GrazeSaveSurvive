@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://v6dic6r8xqsf"]
+[gd_scene load_steps=5 format=3 uid="uid://v6dic6r8xqsf"]
 
 [ext_resource type="PackedScene" uid="uid://ca0ja0fqg2v20" path="res://xp_orb.tscn" id="2_8eejj"]
 [ext_resource type="Script" path="res://enemy.gd" id="2_oysp5"]
 [ext_resource type="PackedScene" uid="uid://dhmd17xaaygxf" path="res://tile.tscn" id="3_5dqsa"]
+[ext_resource type="AudioStream" uid="uid://c1ud3d5ey0w5e" path="res://music/crush.wav" id="4_kol1q"]
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("2_oysp5")
@@ -22,6 +23,10 @@ collision_layer = 18
 collision_mask = 0
 
 [node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kol1q")
+volume_db = -11.243
 
 [connection signal="area_entered" from="MeleeBox" to="." method="_on_melee_box_area_entered"]
 [connection signal="area_exited" from="MeleeBox" to="." method="_on_melee_box_area_exited"]

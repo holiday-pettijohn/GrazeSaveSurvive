@@ -7,6 +7,7 @@ class_name Enemy
 signal hit
 signal death
 
+@onready var dieSound = $DeathSound
 @export var XP = 0
 var hp
 var isContactingPlayer
@@ -76,6 +77,7 @@ func _on_death():
 	
 	add_child(xpOrb)
 	queue_free()
+	dieSound.play()
 
 func _on_hurt_area_entered(area):
 	#print(area, " entered!")
