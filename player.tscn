@@ -156,7 +156,6 @@ sprite_frames = SubResource("SpriteFrames_vyj4h")
 animation = &"idle"
 
 [node name="Body" type="Area2D" parent="."]
-collision_layer = 0
 collision_mask = 9
 script = ExtResource("5_k2c8u")
 metadata/hurtbox = true

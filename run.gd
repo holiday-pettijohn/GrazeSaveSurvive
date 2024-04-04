@@ -6,7 +6,8 @@ var wave_timeleft : int
 var total_time : int
 var game_started: bool
 
-@export var enemy_scene : PackedScene
+@export var enemy_melee_scene : PackedScene
+@export var enemy_ranged_scene : PackedScene
 
 #Tracking the camera
 var vport; var cam
@@ -73,12 +74,13 @@ func updateWaveDisplay():
 
 func spawnWave():
 	#Spawn enemies
-	var enemycount = 10 + wave_count**3 #Funny enemy scaling go brr
+	var melee_count = 10 + wave_count**2 #Funny enemy scaling go brr
+	var ranged_count = 10 + wave_count**2
 	# In all seriousness, this does highlight an issue with no enemy collision
 	# What should we do about this?
-	var c = enemycount
+	var total_count = melee_count + ranged_count
 
-	while (c > 0):
+	while (total_count > 0):
 		#Get an offscreen spawn position
 		var cam_rect = getCameraBounds() #x1x2, x2y2
 		var rand_ypos = randi_range(0, Globals.MAP_HEIGHT) #Random y
@@ -90,11 +92,18 @@ func spawnWave():
 		var spawnPosition = Vector2(rand_xpos, rand_ypos)
 
 		#Create enemy
-		var newEnemy = enemy_scene.instantiate()
+		var newEnemy
+		if (melee_count > 0):
+			newEnemy = enemy_melee_scene.instantiate()
+			melee_count -= 1
+		else:
+			newEnemy = enemy_ranged_scene.instantiate()
+			ranged_count -= 1
+		
 		newEnemy.position = spawnPosition
 
 		add_child(newEnemy)
-		c -= 1
+		total_count -= 1
 
 func getCameraBounds():
 	#Returns an array of 2 vectors: [0] x1y1 and [1] x2y2

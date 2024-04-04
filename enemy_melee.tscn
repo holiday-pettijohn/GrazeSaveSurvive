@@ -1,56 +1,56 @@
 [gd_scene load_steps=20 format=3 uid="uid://0wrjgh8xuga7"]
 
-[ext_resource type="Script" path="res://enemy_test.gd" id="2_ejrwe"]
-[ext_resource type="PackedScene" uid="uid://dhmd17xaaygxf" path="res://tile.tscn" id="3_pw6tn"]
-[ext_resource type="PackedScene" uid="uid://ca0ja0fqg2v20" path="res://xp_orb.tscn" id="3_w56c8"]
-[ext_resource type="Texture2D" uid="uid://dsyg0xyhmijoi" path="res://Green-Cap-Character-16x18.png" id="4_x2wp4"]
+[ext_resource type="Script" path="res://enemy_melee.gd" id="1_jalbv"]
+[ext_resource type="PackedScene" uid="uid://ca0ja0fqg2v20" path="res://xp_orb.tscn" id="2_vttac"]
+[ext_resource type="PackedScene" uid="uid://dhmd17xaaygxf" path="res://tile.tscn" id="3_1qcwi"]
+[ext_resource type="Texture2D" uid="uid://dsyg0xyhmijoi" path="res://Green-Cap-Character-16x18.png" id="4_xpb5l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g634f"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(0, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l1xgi"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(16, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rtxey"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(32, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmug1"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(0, 36, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yj6a4"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(16, 36, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oxmjc"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(32, 36, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hv6sg"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(0, 54, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ra4h5"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(16, 54, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6f7w0"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(32, 54, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eempn"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(0, 18, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yr7k1"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(16, 18, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7b0kn"]
-atlas = ExtResource("4_x2wp4")
+atlas = ExtResource("4_xpb5l")
 region = Rect2(32, 18, 16, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ygwdo"]
@@ -120,10 +120,10 @@ height = 36.0
 radius = 19.0
 height = 76.0
 
-[node name="enemy_test" type="Node2D" groups=["enemy"]]
-script = ExtResource("2_ejrwe")
-xp_scene = ExtResource("3_w56c8")
-tile = ExtResource("3_pw6tn")
+[node name="enemy_melee" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_jalbv")
+xp_scene = ExtResource("2_vttac")
+tile = ExtResource("3_1qcwi")
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -144,5 +144,5 @@ collision_mask = 0
 [node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_37x6t")
 
-[connection signal="area_entered" from="MeleeBox" to="." method="_on_melee_area_entered"]
+[connection signal="area_entered" from="MeleeBox" to="." method="_on_melee_box_area_entered"]
 [connection signal="area_exited" from="MeleeBox" to="." method="_on_melee_box_area_exited"]

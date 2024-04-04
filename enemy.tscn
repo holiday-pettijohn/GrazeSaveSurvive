@@ -12,9 +12,18 @@ metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 
-[node name="Body" type="Area2D" parent="."]
+[node name="MeleeBox" type="Area2D" parent="."]
+collision_layer = 0
 
-[node name="Hurtbox" type="CollisionShape2D" parent="Body"]
+[node name="MeleeShape" type="CollisionShape2D" parent="MeleeBox"]
 
-[connection signal="body_entered" from="Body" to="." method="_on_body_body_entered"]
-[connection signal="body_exited" from="Body" to="." method="_on_body_body_exited"]
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 18
+collision_mask = 0
+
+[node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
+
+[connection signal="area_entered" from="MeleeBox" to="." method="_on_melee_box_area_entered"]
+[connection signal="area_exited" from="MeleeBox" to="." method="_on_melee_box_area_exited"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_body_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="." method="_on_body_body_exited"]

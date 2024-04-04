@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://base_scene.gd" id="1_ho1pr"]
 [ext_resource type="PackedScene" uid="uid://b7yaqvhsdemge" path="res://player.tscn" id="2_7emnb"]
-[ext_resource type="PackedScene" uid="uid://0wrjgh8xuga7" path="res://enemy_test.tscn" id="2_ta0op"]
+[ext_resource type="PackedScene" uid="uid://0wrjgh8xuga7" path="res://enemy_melee.tscn" id="2_ta0op"]
 [ext_resource type="Texture2D" uid="uid://h2l62gy846ti" path="res://art/grass_tilemap.png" id="3_1octi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ood0q"]
