@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bsnj5n8lmtgfu"]
 
-[ext_resource type="Texture2D" uid="uid://dbdx5f6n7kg2f" path="res://forestground06dv5.png" id="1_obg18"]
+[ext_resource type="Texture2D" uid="uid://dbdx5f6n7kg2f" path="res://art/forestground06dv5.png" id="1_obg18"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6mli"]
 resource_name = "ForestBackdrop"
