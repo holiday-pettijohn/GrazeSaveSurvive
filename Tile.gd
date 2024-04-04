@@ -2,6 +2,14 @@ extends Node2D
 
 var SAMPLE_TILE_1 = 0x000205840131
 var tile_data
+# TILE DATA FORMAT:
+# 6-byte BLOB in db
+# [Buff3 Val] [Buff2 Val] [Buff1 Val] [Buff #s] [Bitmap] [Bitmap]
+#
+# Bitmap stores tile shape in 4x4 field
+# 
+# Buff #s: 8 possible buffs, 1-bit indicator for Buff1-3 (in order: 0x01 -> Buff1=Melee Dmg)
+# Buf Vals: 0-255 multiplier to base buff, dependent on Buff #
 
 var buffs = {}
 var color = Color()
@@ -32,7 +40,7 @@ func _process(delta):
 
 
 func generate_tile(tile_id):
-	if (!tile_id):
+	if (tile_id == -1):
 		tile_id = randi()%32
 	
 	#get tile data from db
