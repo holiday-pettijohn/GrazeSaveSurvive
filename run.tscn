@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c54803c4ku3iv"]
+[gd_scene load_steps=13 format=3 uid="uid://c54803c4ku3iv"]
 
 [ext_resource type="Texture2D" uid="uid://drdnv41l2ddo4" path="res://art/grass.png" id="1_66ckc"]
 [ext_resource type="Script" path="res://run.gd" id="1_ho1pr"]
 [ext_resource type="PackedScene" uid="uid://b7yaqvhsdemge" path="res://player.tscn" id="2_7emnb"]
 [ext_resource type="PackedScene" uid="uid://0wrjgh8xuga7" path="res://enemy_melee.tscn" id="2_ta0op"]
+[ext_resource type="PackedScene" uid="uid://boyrr20smd23j" path="res://enemy_ranged.tscn" id="3_6lwf2"]
 [ext_resource type="AudioStream" uid="uid://55tsbmscdp44" path="res://music/Lvl 2 Music.mp3" id="3_ajgw1"]
 [ext_resource type="Texture2D" uid="uid://qeh3yxhc6nvj" path="res://art/enemy_walk.png" id="6_i8agi"]
 [ext_resource type="Texture2D" uid="uid://bwqggkcsw33e2" path="res://art/enemy_idle.png" id="7_05wt7"]
@@ -36,7 +37,8 @@ sources/0 = SubResource("TileSetAtlasSource_xuc7i")
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ho1pr")
-enemy_scene = ExtResource("2_ta0op")
+enemy_melee_scene = ExtResource("2_ta0op")
+enemy_ranged_scene = ExtResource("3_6lwf2")
 
 [node name="Lvl Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ajgw1")
