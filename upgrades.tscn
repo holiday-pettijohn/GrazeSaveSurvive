@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgnr0wq45o5br"]
+[gd_scene load_steps=3 format=3 uid="uid://cgnr0wq45o5br"]
 
 [ext_resource type="Script" path="res://BackButton.gd" id="1_nde5e"]
+[ext_resource type="Script" path="res://upgrades.gd" id="1_ou8nr"]
 
 [node name="Upgrades" type="Node2D"]
+script = ExtResource("1_ou8nr")
 
 [node name="BackButton" type="Button" parent="."]
 offset_left = 49.0
