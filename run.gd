@@ -76,7 +76,14 @@ func updateWaveDisplay():
 
 	$UI/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
 	$UI/WaveDisplay/displayWaveTime.text = text_mins + text_secs
-
+	if (wave_count == 5):
+		lvl1music.stop()
+		bossBuildTune.play()
+		
+	if (wave_count == 6):
+		bossBuildTune.stop()
+		lvl2music.play()
+		
 	if !$Player.alive:
 		game_over()
 
@@ -130,4 +137,5 @@ func updateGlobalTimeDisplay():
 	if (mins > 0):
 		text_mins = str(mins) + "m"
 	$UI/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
+
 
