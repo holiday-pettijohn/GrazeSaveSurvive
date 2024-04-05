@@ -110,8 +110,10 @@ func process_hit(dmg):
 		newXpOrb.global_position = self.global_position
 		newXpOrb.amount = XP
 		add_sibling(newXpOrb)# - Must move this to the main function!
-		var newTile = tile.instantiate()
-		newTile.generate_tile(-1)
-		newTile.global_position = self.global_position
-		add_sibling(newTile)
+		if (randi() % 5 == 0):
+			var newTile = tile.instantiate()
+			newTile.generate_tile(-1)
+			newTile.global_position = self.global_position
+			newTile.render_tiles()
+			add_sibling(newTile)
 		queue_free()
