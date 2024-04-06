@@ -41,7 +41,7 @@ func set_stats():
 	
 	#Player Stats (from parent)
 	MAX_HP = 5
-	SPEED = 300
+	SPEED = 250
 	# Base contact and ranged damage
 	DMG_CONTACT = 0
 	DMG_RANGED = 1

@@ -80,9 +80,6 @@ func _on_death():
 	dieSound.play()
 
 func _on_hurt_area_entered(area):
-	#print(area, " entered!")
-	#print(area.get_parent().GROUP)
-	#print(enemyHealth)
 	if area.get_parent().GROUP == 2:
 		hp -= 1
 		hit.emit()
