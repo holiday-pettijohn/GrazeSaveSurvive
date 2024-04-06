@@ -9,10 +9,10 @@ var game_started: bool
 @export var enemy_melee_scene : PackedScene
 @export var enemy_ranged_scene : PackedScene
 
-@onready var lvl1music = $"Lvl1Music"
-@onready var lvl2music = $"Lvl2Music"
-@onready var bossBuildTune = $"Boss BuildupMusic"
-@onready var deathmusic = $"DeathMusic"
+@onready var lvl1music = $"Music/Lvl1Music"
+@onready var lvl2music = $"Music/Lvl2Music"
+@onready var bossBuildTune = $"Music/Boss BuildupMusic"
+@onready var deathmusic = $"Music/DeathMusic"
 
 #Tracking the camera
 var vport; var cam
@@ -28,9 +28,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $Player.hp != null:
-		$UI/HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
+		$UI/StatsBar/HealthBar.value = int(100*(float($Player.hp)/$Player.MAX_HP))
 	if $Player.xp != null:
-		$UI/XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
+		$UI/StatsBar/XPBar.value = int(100*(float($Player.xp)/$Player.level_threshold($Player.level)))
 
 func start_game():
 	#Player starts in middle of screen
@@ -39,11 +39,17 @@ func start_game():
 	wave_duration = 5 #Start with 5 second rest
 	wave_timeleft = wave_duration
 	updateWaveDisplay()
+	updateGlobalTimeDisplay()
 	$WaveTimer.start()
 	lvl1music.play()
 
+func _on_player_death():
+	game_over()
+
 func game_over():
 	lvl1music.stop()
+	lvl2music.stop()
+	bossBuildTune.stop()
 	$WaveTimer.stop()
 	$UI/Results.show()
 	deathmusic.play()
@@ -57,10 +63,20 @@ func _on_wave_timer_timeout():
 
 		wave_count += 1
 		setWaveTimer() #Reset timer
+		updateMusic()
 		wave_timeleft = wave_duration
 
 	updateWaveDisplay()
 	updateGlobalTimeDisplay()
+
+func updateMusic():
+	if (wave_count == 5):
+		lvl1music.stop()
+		bossBuildTune.play()
+		
+	if (wave_count == 6):
+		bossBuildTune.stop()
+		lvl2music.play()
 
 func setWaveTimer():
 	wave_duration = 15#(15*wave_count) + 5 #Waves (don't) get longer
@@ -76,16 +92,6 @@ func updateWaveDisplay():
 
 	$UI/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
 	$UI/WaveDisplay/displayWaveTime.text = text_mins + text_secs
-	if (wave_count == 5):
-		lvl1music.stop()
-		bossBuildTune.play()
-		
-	if (wave_count == 6):
-		bossBuildTune.stop()
-		lvl2music.play()
-		
-	if !$Player.alive:
-		game_over()
 
 func spawnWave():
 	#Spawn enemies
@@ -136,6 +142,4 @@ func updateGlobalTimeDisplay():
 	var mins = int(total_time / 60) #Truncated
 	if (mins > 0):
 		text_mins = str(mins) + "m"
-	$UI/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
-
-
+	$UI/GlobalTimeDisplay/displayGlobalTime.text = "Time elapsed: " + text_mins + text_secs

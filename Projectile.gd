@@ -14,7 +14,6 @@ func _ready():
 func _process(delta):
 	lifetime -= delta
 	if lifetime <= 0:
-		print("Projectile exited screen!")
 		queue_free()
 
 func _physics_process(delta):
