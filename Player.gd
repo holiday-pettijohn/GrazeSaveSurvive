@@ -29,9 +29,6 @@ var RANGED_COOLDOWN = 1
 
 var velocity
 
-var player_id : int = 0
-var picked_up_items : Array
-
 @onready var hitSound = $"Hit SFX"
 @onready var pickupSFX = $"Pickup SFX"
 @onready var hurtSFX = $"HurtSound"
@@ -183,21 +180,11 @@ func level_up():
 func level_threshold(lvl):
 	return lvl*5
 
-func pick_up_item(item_id):
-	picked_up_items.push_back(item_id)
-
-func save_items():
-	var db = SQLite.new()
-	db.path = "res://database.sqlite3"
-	db.open_db()
-	for item_id in picked_up_items:
-		db.insert_row("player_item_inventory", {"player_id": player_id, "item_id" : item_id})
-	db.close_db()
-
 func _on_death():
-	alive = false
-	$PickupBody/PickupBox.set_deferred("disabled", true) #Disable pickups
-	save_items()
+	if alive: # Prevents multiple unnecessary db refreshes
+		alive = false
+		$PickupBody/PickupBox.set_deferred("disabled", true) #Disable pickups
+		db.refresh()
 
 func _on_hit():
 	pass # Replace with function body.
