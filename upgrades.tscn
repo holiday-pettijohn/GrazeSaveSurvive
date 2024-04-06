@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgnr0wq45o5br"]
+[gd_scene load_steps=4 format=3 uid="uid://cgnr0wq45o5br"]
 
 [ext_resource type="Script" path="res://BackButton.gd" id="1_nde5e"]
 [ext_resource type="Script" path="res://upgrades.gd" id="1_ou8nr"]
+[ext_resource type="PackedScene" uid="uid://dmc4wtywvud4y" path="res://BgMusic.tscn" id="2_753s4"]
 
 [node name="Upgrades" type="Node2D"]
 script = ExtResource("1_ou8nr")
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("2_753s4")]
 
 [node name="BackButton" type="Button" parent="."]
 offset_left = 49.0
