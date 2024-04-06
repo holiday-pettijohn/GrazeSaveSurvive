@@ -8,14 +8,13 @@ var acceleration = Vector2(0, 0)
 var velocity = Vector2(0, 0)
 var pierces = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	lifetime = Globals.MAP_WIDTH / velocity.length() #Roughly the time it takes to leave the map
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	lifetime -= delta
 	if lifetime <= 0:
+		print("Projectile exited screen!")
 		queue_free()
 
 func _physics_process(delta):

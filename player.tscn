@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rhtgq"]
 [ext_resource type="Texture2D" uid="uid://cirdphg3y2eyp" path="res://art/cow_oga.png" id="2_d3wot"]
-[ext_resource type="PackedScene" uid="uid://cy6oacass3itf" path="res://projectile.tscn" id="2_tjf4v"]
+[ext_resource type="PackedScene" uid="uid://c877g7x1c4nji" path="res://projectile_friendly.tscn" id="2_mxsms"]
 [ext_resource type="Texture2D" uid="uid://dvb6rn5vc0lo8" path="res://art/player_death.png" id="2_v54db"]
 [ext_resource type="Script" path="res://player_hitbox.gd" id="5_k2c8u"]
 [ext_resource type="Texture2D" uid="uid://ds48nfx10kvus" path="res://art/attack_melee.png" id="6_kr4kq"]
@@ -150,8 +150,9 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D" groups=["player"]]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_rhtgq")
-projectile = ExtResource("2_tjf4v")
+projectile = ExtResource("2_mxsms")
 metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]

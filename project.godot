@@ -23,7 +23,12 @@ Globals="*res://globals.gd"
 
 window/size/viewport_width=800
 window/size/viewport_height=800
+window/size/resizable=false
 window/vsync/vsync_mode=0
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg")
 
 [input]
 
