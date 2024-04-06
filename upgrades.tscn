@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgnr0wq45o5br"]
+[gd_scene load_steps=5 format=3 uid="uid://cgnr0wq45o5br"]
 
 [ext_resource type="Script" path="res://BackButton.gd" id="1_nde5e"]
 [ext_resource type="Script" path="res://upgrades.gd" id="1_ou8nr"]
 [ext_resource type="PackedScene" uid="uid://dmc4wtywvud4y" path="res://BgMusic.tscn" id="2_753s4"]
+[ext_resource type="PackedScene" uid="uid://dhmd17xaaygxf" path="res://tile.tscn" id="2_obfxh"]
 
 [node name="Upgrades" type="Node2D"]
 script = ExtResource("1_ou8nr")
+tile = ExtResource("2_obfxh")
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource("2_753s4")]
 
@@ -17,21 +19,7 @@ offset_bottom = 98.0
 text = "Back"
 script = ExtResource("1_nde5e")
 
-[node name="Weapons" type="Button" parent="."]
-offset_left = 182.0
-offset_top = 629.0
-offset_right = 262.0
-offset_bottom = 660.0
-text = "Weapons
-"
-
-[node name="Tiles" type="Button" parent="."]
-offset_left = 551.0
-offset_top = 626.0
-offset_right = 595.0
-offset_bottom = 657.0
-text = "Tiles
-"
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 458.0
@@ -140,8 +128,5 @@ layout_mode = 2
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="RangedWeapon" type="Sprite2D" parent="."]
-
-[node name="MeleeWeapon" type="Sprite2D" parent="."]
-
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="BackButton" to="BackButton" method="_on_back_pressed"]

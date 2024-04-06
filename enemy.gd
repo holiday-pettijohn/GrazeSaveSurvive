@@ -110,7 +110,7 @@ func process_hit(dmg):
 		if (randi() % 5 == 0):
 			var newTile = tile.instantiate()
 			newTile.generate_tile(-1)
+			add_sibling(newTile)
 			newTile.global_position = self.global_position
 			newTile.render_tiles()
-			add_sibling(newTile)
 		queue_free()

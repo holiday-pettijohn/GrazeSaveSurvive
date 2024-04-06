@@ -19,6 +19,9 @@ var tile_offset = Vector2i(40, 40)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
+
+func _on_ready():
 	tile_data = db.get_item_data([tile_id])[0]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,6 +33,7 @@ func render_tiles():
 	var bitmap_data = tile_data.slice(-2)
 	bitmap_data.reverse() # was having problems w/o doing this, endianness maybe?
 	var bitmap = bitmap_data.decode_u16(0)
+	color = Color(tile_data[0], tile_data[1], tile_data[2])
 	
 	for y in 4:
 		for x in 4:
