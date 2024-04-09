@@ -29,12 +29,16 @@ var RANGED_COOLDOWN = 1
 
 var velocity
 
+@onready var hitSound = $"Hit SFX"
+@onready var pickupSFX = $"Pickup SFX"
+@onready var hurtSFX = $"HurtSound"
+
 func set_stats():
 	alive = true
-	
+
 	#Player Stats (from parent)
 	MAX_HP = 5
-	SPEED = 300
+	SPEED = 250
 	# Base contact and ranged damage
 	DMG_CONTACT = 0
 	DMG_RANGED = 1
@@ -43,7 +47,7 @@ func set_stats():
 	level = 1
 	hp = MAX_HP
 	xp = 0
-	
+
 	#Attack Stats
 	mCooldownTimer = 0
 	MELEE_RANGE = 64 #Melee collision box x-offset from player
@@ -57,7 +61,7 @@ func start(start_position):
 	$PlayerSprite.animation = "idle"
 	$PlayerSprite.play()
 	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
-	
+
 	#Attacks
 	melee_hide() #Hide collision box
 
@@ -128,6 +132,7 @@ func ranged_attack():
 	firedBullet.velocity = Vector2(direction*1000, 0)
 	firedBullet.DMG = DMG_RANGED
 
+	hitSound.play()
 	add_sibling(firedBullet)
 
 ############## MELEE ATTACK FUNCTIONS ##############
@@ -136,20 +141,24 @@ func melee_attack():
 	$MeleeBody/MeleeBox.set_deferred("disabled", false)
 	$MeleeBody.position.x = MELEE_RANGE * (-1 ** int($PlayerSprite.flip_h))
 	$MeleeBody/MeleeSprite.flip_h = $PlayerSprite.flip_h
-	
+
 	#Set timer for melee duration
 	$MeleeBody/MeleeDuration.one_shot = true
 	$MeleeBody/MeleeDuration.wait_time = 0.2 #Time an attack stays on screen
 	$MeleeBody/MeleeDuration.start()
 
+	hitSound.play()
+
+
+
 func melee_hide():
 	$MeleeBody.hide()
 	$MeleeBody/MeleeBox.set_deferred("disabled", true)
 	$MeleeBody.position.x = 0 #Reset to player position
-	
+
 func _on_melee_duration_timeout():
 	melee_hide()
-	
+
 ######################################################
 
 func gain_xp(amount):
@@ -166,13 +175,19 @@ func level_up():
 	hp += 4
 	if hp > MAX_HP:
 		hp = MAX_HP
+	print(MAX_HP)
+	print(hp)
+	print(hp/MAX_HP)
+	pickupSFX.play()
 
 func level_threshold(lvl):
 	return lvl*5
 
 func _on_death():
-	alive = false
-	$PickupBody/PickupBox.set_deferred("disabled", true) #Disable pickups
+	if alive: # Prevents multiple unnecessary db refreshes
+		alive = false
+		$PickupBody/PickupBox.set_deferred("disabled", true) #Disable pickups
+		db.refresh()
 
 func _on_hit():
 	pass # Replace with function body.
@@ -182,4 +197,5 @@ func game_over():
 
 
 func _on_melee_body_area_entered(body):
+	hurtSFX.play()
 	body.get_parent().process_hit(DMG_MELEE)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://blghgokra14vp"]
+
+[ext_resource type="PackedScene" uid="uid://cy6oacass3itf" path="res://projectile.tscn" id="1_llp5c"]
+[ext_resource type="Script" path="res://projectile_enemy.gd" id="2_71qie"]
+[ext_resource type="Texture2D" uid="uid://xxunrh2wgkoc" path="res://art/projectile_enemy.png" id="3_v3mtw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0q148"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8uurv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_v3mtw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Projectile" instance=ExtResource("1_llp5c")]
+z_index = 0
+script = ExtResource("2_71qie")
+
+[node name="Hitbox" parent="." index="0"]
+collision_mask = 1
+
+[node name="Shape" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_0q148")
+
+[node name="Sprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_8uurv")

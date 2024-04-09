@@ -3,6 +3,8 @@ extends Node2D
 var final_level
 var final_kills
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	final_level = 0

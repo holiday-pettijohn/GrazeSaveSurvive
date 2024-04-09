@@ -7,6 +7,7 @@ class_name Enemy
 signal hit
 signal death
 
+@onready var dieSound = $DeathSound
 @export var XP = 0
 var hp
 var isContactingPlayer
@@ -42,7 +43,7 @@ func _process(delta):
 		$Sprite.stop() #Idle
 		$Sprite.frame = 0
 		return
-	
+
 	$Sprite.play()
 	move(delta)
 
@@ -50,7 +51,7 @@ func move(delta):
 	#Default behavior: Step towards player
 	move_vector = get_parent().get_node("Player").position - position #Face player always
 	position += move_vector.normalized() * delta * SPEED
-	
+
 func updateAnimation():
 	var prevFrame = $Sprite.get_frame()
 	var prevFrameProgress = $Sprite.get_frame_progress()
@@ -68,23 +69,21 @@ func updateAnimation():
 	#Since changing animation resets the frame state, resume old state
 	$Sprite.frame = prevFrame
 	$Sprite.frame_progress = prevFrameProgress
-	
+
 func _on_death():
 	var xpOrb = xp_scene.instantiate()
 	var spawnPosition = Vector2.ZERO
 	xpOrb.position = self.position
-	
+
 	add_child(xpOrb)
 	queue_free()
+	dieSound.play()
 
 func _on_hurt_area_entered(area):
-	#print(area, " entered!")
-	#print(area.get_parent().GROUP)
-	#print(enemyHealth)
 	if area.get_parent().GROUP == 2:
 		hp -= 1
 		hit.emit()
-	
+
 	#Enemy death
 	if (hp <= 0):
 		$EnenySprite.animation = "death"
@@ -108,9 +107,11 @@ func process_hit(dmg):
 		newXpOrb.global_position = self.global_position
 		newXpOrb.amount = XP
 		add_sibling(newXpOrb)# - Must move this to the main function!
-		var newTile = tile.instantiate()
-		newTile.generate_tile(-1)
-		newTile.global_position = self.global_position
-		add_sibling(newTile)
+		if (randi() % 5 == 0):
+			var newTile = tile.instantiate()
+			newTile.generate_tile(-1)
+			add_sibling(newTile)
+			newTile.global_position = self.global_position
+			newTile.render_tiles()
 		death.emit()
 		queue_free()
