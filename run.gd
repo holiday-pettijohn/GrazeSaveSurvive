@@ -12,12 +12,15 @@ var game_started: bool
 #Tracking the camera
 var vport; var cam
 
+var kills
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Get viewport and camera
 	vport = get_viewport()
 	cam = vport.get_camera_2d()
 	start_game()
+	kills = 0
 	game_started = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,6 +41,8 @@ func start_game():
 
 func game_over():
 	$WaveTimer.stop()
+	$UI/Results.final_level = $Player.level
+	$UI/Results.final_kills = kills
 	$UI/Results.show()
 
 func _on_wave_timer_timeout():
@@ -95,9 +100,13 @@ func spawnWave():
 		var newEnemy
 		if (melee_count > 0):
 			newEnemy = enemy_melee_scene.instantiate()
+			newEnemy.connect("death", increment_kills)
+			newEnemy.DMG_CONTACT *= wave_count/2
 			melee_count -= 1
 		else:
 			newEnemy = enemy_ranged_scene.instantiate()
+			newEnemy.connect("death", increment_kills)
+			newEnemy.DMG_RANGED *= wave_count/2
 			ranged_count -= 1
 		
 		newEnemy.position = spawnPosition
@@ -123,3 +132,5 @@ func updateGlobalTimeDisplay():
 		text_mins = str(mins) + "m"
 	$UI/GlobalTimeDisplay/displayGlobalTime.text = "Time: " + text_mins + text_secs
 
+func increment_kills():
+	kills += 1

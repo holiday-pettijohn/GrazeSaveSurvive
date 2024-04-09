@@ -160,12 +160,12 @@ func gain_xp(amount):
 func level_up():
 	xp -= level_threshold(level)
 	level += 1
-	DMG_CONTACT += 1
+	DMG_MELEE += 1
 	DMG_RANGED += 1
 	MAX_HP += 2
-	print(MAX_HP)
-	print(hp)
-	print(hp/MAX_HP)
+	hp += 4
+	if hp > MAX_HP:
+		hp = MAX_HP
 
 func level_threshold(lvl):
 	return lvl*5

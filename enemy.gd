@@ -112,4 +112,5 @@ func process_hit(dmg):
 		newTile.generate_tile(-1)
 		newTile.global_position = self.global_position
 		add_sibling(newTile)
+		death.emit()
 		queue_free()

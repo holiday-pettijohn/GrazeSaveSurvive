@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0wrjgh8xuga7"]
+[gd_scene load_steps=20 format=3 uid="uid://n7grhy18j88u"]
 
 [ext_resource type="Script" path="res://enemy_melee.gd" id="1_jalbv"]
 [ext_resource type="PackedScene" uid="uid://ca0ja0fqg2v20" path="res://xp_orb.tscn" id="2_vttac"]
