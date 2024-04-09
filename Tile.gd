@@ -54,7 +54,7 @@ func generate_tile(tile_id_input : int):
 	
 	if (tile_id_input == -1): # random tile selection
 		tile_id = randi()%32
-		tile_offset = Vector2i(10, 10)
+		#tile_offset = Vector2i(10, 10)
 	else:
 		tile_id = tile_id_input
 	
