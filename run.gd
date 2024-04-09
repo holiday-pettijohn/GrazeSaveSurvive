@@ -90,8 +90,9 @@ func updateWaveDisplay():
 	if (mins > 0):
 		text_mins = str(mins) + "m"
 
-	$UI/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
-	$UI/WaveDisplay/displayWaveTime.text = text_mins + text_secs
+	#$UI/WaveDisplay/displayWaveCount.text = "Wave: " + str(wave_count)
+	#$UI/WaveDisplay/displayWaveTime.text = text_mins + text_secs
+	$UI/WaveDisplay/HBoxContainer/AnimatedSprite2D.play(str(wave_count))
 
 func spawnWave():
 	#Spawn enemies
