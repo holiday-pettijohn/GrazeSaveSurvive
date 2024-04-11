@@ -27,17 +27,17 @@ offset_top = 392.0
 offset_right = 312.0
 offset_bottom = 640.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Main Controls" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Start Run Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="StartRunButton" type="Button" parent="MarginContainer/Main Controls"]
 layout_mode = 2
 text = "Start Run
 "
 script = ExtResource("1_digdb")
 
-[node name="ProfileButton" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+[node name="ProfileButton" type="OptionButton" parent="MarginContainer/Main Controls"]
 layout_mode = 2
 item_count = 3
 selected = 0
@@ -49,17 +49,17 @@ popup/item_2/text = "Player 3"
 popup/item_2/id = 2
 script = ExtResource("3_q01l1")
 
-[node name="Upgrades Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Upgrades Button" type="Button" parent="MarginContainer/Main Controls"]
 layout_mode = 2
 text = "Upgrades"
 script = ExtResource("1_xjpvx")
 
-[node name="Options Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Options Button" type="Button" parent="MarginContainer/Main Controls"]
 layout_mode = 2
 text = "Options"
 script = ExtResource("3_vm0k0")
 
-[node name="Quit Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Quit Button" type="Button" parent="MarginContainer/Main Controls"]
 layout_mode = 2
 text = "Quit"
 script = ExtResource("1_8vvve")
@@ -67,6 +67,7 @@ script = ExtResource("1_8vvve")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="BgMusic" parent="." instance=ExtResource("5_obl1s")]
+volume_db = -3.279
 
 [node name="MouseHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_v5hbq")
@@ -76,9 +77,9 @@ volume_db = -2.342
 stream = ExtResource("7_cmfmo")
 volume_db = -7.495
 
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Start Run Button" to="MarginContainer/VBoxContainer/Start Run Button" method="_on_mouse_entered"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Start Run Button" to="MarginContainer/VBoxContainer/Start Run Button" method="_on_run_pressed"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/ProfileButton" to="MarginContainer/VBoxContainer/ProfileButton" method="_on_item_selected"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Upgrades Button" to="MarginContainer/VBoxContainer/Upgrades Button" method="_on_upgrades_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Options Button" to="MarginContainer/VBoxContainer/Options Button" method="_on_options_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit Button" to="MarginContainer/VBoxContainer/Quit Button" method="_on_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Main Controls/StartRunButton" to="MarginContainer/Main Controls/StartRunButton" method="_on_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/Main Controls/StartRunButton" to="MarginContainer/Main Controls/StartRunButton" method="_on_run_pressed"]
+[connection signal="item_selected" from="MarginContainer/Main Controls/ProfileButton" to="MarginContainer/Main Controls/ProfileButton" method="_on_item_selected"]
+[connection signal="pressed" from="MarginContainer/Main Controls/Upgrades Button" to="MarginContainer/Main Controls/Upgrades Button" method="_on_upgrades_pressed"]
+[connection signal="pressed" from="MarginContainer/Main Controls/Options Button" to="MarginContainer/Main Controls/Options Button" method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/Main Controls/Quit Button" to="MarginContainer/Main Controls/Quit Button" method="_on_pressed"]
