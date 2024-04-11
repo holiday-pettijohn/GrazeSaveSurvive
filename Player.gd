@@ -149,8 +149,6 @@ func melee_attack():
 
 	hitSound.play()
 
-
-
 func melee_hide():
 	$MeleeBody.hide()
 	$MeleeBody/MeleeBox.set_deferred("disabled", true)
@@ -171,17 +169,17 @@ func level_up():
 	level += 1
 	DMG_MELEE += 1
 	DMG_RANGED += 1
-	MAX_HP += 1
-	hp += 2
-	if hp > MAX_HP:
-		hp = MAX_HP
+	MAX_HP += 2
+	hp = MAX_HP #Fully heal upon level-up
+	MELEE_COOLDOWN *= 0.9
+	RANGED_COOLDOWN *= 0.9
 	print(MAX_HP)
 	print(hp)
 	print(hp/MAX_HP)
 	pickupSFX.play()
 
 func level_threshold(lvl):
-	return lvl*5
+	return lvl*10
 
 func _on_death():
 	if alive: # Prevents multiple unnecessary db refreshes

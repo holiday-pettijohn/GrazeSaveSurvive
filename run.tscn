@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c54803c4ku3iv"]
+[gd_scene load_steps=29 format=3 uid="uid://c54803c4ku3iv"]
 
 [ext_resource type="Script" path="res://run.gd" id="1_ho1pr"]
 [ext_resource type="PackedScene" uid="uid://b7yaqvhsdemge" path="res://player.tscn" id="2_7emnb"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bqd58p0khumk8" path="res://music/Build music.mp3" id="5_vtkga"]
 [ext_resource type="AudioStream" uid="uid://ddhbguwdok4xu" path="res://music/Boss Build.mp3" id="6_x5hhq"]
 [ext_resource type="PackedScene" uid="uid://brpm2kg82dhhe" path="res://results.tscn" id="8_7ttu5"]
+[ext_resource type="AudioStream" uid="uid://cwspcntolam6n" path="res://sfx/Ambient main.mp3" id="8_7ukm2"]
 [ext_resource type="Texture2D" uid="uid://cqmsineorkwp0" path="res://art/wave.png" id="8_iaxd4"]
 [ext_resource type="Texture2D" uid="uid://bfv5vyisvkaj8" path="res://art/numbers/one.png" id="8_qmays"]
 [ext_resource type="Texture2D" uid="uid://7sgr858j7tjv" path="res://art/numbers/two.png" id="9_ayl5y"]
@@ -154,6 +155,11 @@ volume_db = -11.275
 [node name="Boss BuildupMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("6_x5hhq")
 volume_db = -2.843
+
+[node name="Ambience" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("8_7ukm2")
+volume_db = -6.269
+autoplay = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
