@@ -40,7 +40,7 @@ func _on_attack_cooldown_timeout():
 func shoot():
 	var firedBullet = projectile.instantiate()
 	var direction = get_parent().get_node("Player").position - position
-	direction = direction.rotated(randf()-0.5)
+	direction = direction.rotated((randf()-0.5)/2)
 	firedBullet.position = position
 	firedBullet.velocity = direction.normalized()*100
 	firedBullet.DMG = DMG_RANGED
