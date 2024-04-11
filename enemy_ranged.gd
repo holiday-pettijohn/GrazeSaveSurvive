@@ -23,7 +23,7 @@ func _process(delta):
 	
 func start():
 	$AttackCooldown.one_shot = true
-	$AttackCooldown.wait_time = randi_range(2,3)
+	$AttackCooldown.wait_time = randi_range(3,6)
 	$AttackCooldown.start()
 	super.start() #Call the rest of the parent start code
 
