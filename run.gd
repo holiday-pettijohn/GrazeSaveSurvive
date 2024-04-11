@@ -19,6 +19,10 @@ var vport; var cam
 
 var kills
 
+var win
+
+signal game_end
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Get viewport and camera
@@ -26,6 +30,7 @@ func _ready():
 	cam = vport.get_camera_2d()
 	start_game()
 	kills = 0
+	win = false
 	game_started = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,6 +44,7 @@ func start_game():
 	#Player starts in middle of screen
 	$StartPosition.position = Vector2(Globals.MAP_WIDTH / 2, Globals.MAP_HEIGHT / 2)
 	$Player.start($StartPosition.position)
+	game_end.connect($UI/Results.game_end)
 	wave_duration = 5 #Start with 5 second rest
 	wave_timeleft = wave_duration
 	updateWaveDisplay()
@@ -48,6 +54,7 @@ func start_game():
 
 func _on_player_death():
 	game_over()
+	game_end.emit()
 
 func game_over():
 	lvl1music.stop()
@@ -56,6 +63,7 @@ func game_over():
 	$WaveTimer.stop()
 	$UI/Results.final_level = $Player.level
 	$UI/Results.final_kills = kills
+	$UI/Results.win = win
 	$UI/Results.show()
 	deathmusic.play()
 
@@ -63,14 +71,17 @@ func _on_wave_timer_timeout():
 	wave_timeleft -= 1
 	total_time += 1
 
-	if (wave_timeleft <= 0):
+	if (wave_timeleft <= 0 and wave_count < 10):
 		spawnWave()
 
 		wave_count += 1
 		setWaveTimer() #Reset timer
 		updateMusic()
 		wave_timeleft = wave_duration
-
+	elif wave_count == 10:
+		win = 1
+		game_over()
+		game_end.emit() #Spawn big enemy instance? Otherwise win
 	updateWaveDisplay()
 	updateGlobalTimeDisplay()
 
@@ -84,7 +95,7 @@ func updateMusic():
 		lvl2music.play()
 
 func setWaveTimer():
-	wave_duration = 15#(15*wave_count) + 5 #Waves (don't) get longer
+	wave_duration = 15 + 2*wave_count #Waves get a little longer
 
 func updateWaveDisplay():
 	var text_secs = "0"
@@ -101,8 +112,8 @@ func updateWaveDisplay():
 
 func spawnWave():
 	#Spawn enemies
-	var melee_count = 10 + wave_count**2 #Funny enemy scaling go brr
-	var ranged_count = 10 + wave_count**2
+	var melee_count = 10 + wave_count**1.2 #Funny enemy scaling go brr
+	var ranged_count = 10 + wave_count**1.2
 	# In all seriousness, this does highlight an issue with no enemy collision
 	# What should we do about this?
 	var total_count = melee_count + ranged_count
@@ -123,16 +134,22 @@ func spawnWave():
 		if (melee_count > 0):
 			newEnemy = enemy_melee_scene.instantiate()
 			newEnemy.connect("death", increment_kills)
+			newEnemy.MAX_HP += randi_range(0, wave_count/2)
+			newEnemy.hp = newEnemy.MAX_HP
 			newEnemy.DMG_CONTACT *= wave_count/2
 			melee_count -= 1
 		else:
 			newEnemy = enemy_ranged_scene.instantiate()
 			newEnemy.connect("death", increment_kills)
+			newEnemy.RANGED_VELOCITY_MULT = randf_range(1.0, 1.5+0.5*wave_count)
+			newEnemy.MAX_HP += randi_range(0, wave_count/2)
+			newEnemy.hp = newEnemy.MAX_HP
 			newEnemy.DMG_RANGED *= wave_count/2
 			ranged_count -= 1
 
 		newEnemy.position = spawnPosition
 
+		game_end.connect(newEnemy.game_end)
 		add_child(newEnemy)
 		total_count -= 1
 

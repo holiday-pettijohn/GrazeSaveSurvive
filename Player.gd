@@ -171,8 +171,8 @@ func level_up():
 	level += 1
 	DMG_MELEE += 1
 	DMG_RANGED += 1
-	MAX_HP += 2
-	hp += 4
+	MAX_HP += 1
+	hp += 2
 	if hp > MAX_HP:
 		hp = MAX_HP
 	print(MAX_HP)

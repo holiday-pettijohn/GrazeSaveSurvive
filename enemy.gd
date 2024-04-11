@@ -14,6 +14,7 @@ var isContactingPlayer
 var velocity
 var move_vector
 var isMoving : bool
+var isChasingPlayer: bool
 
 func set_stats():
 	#Overridden by child
@@ -33,6 +34,7 @@ func start():
 	GROUP = 2
 	hp = MAX_HP
 	isContactingPlayer = false
+	isChasingPlayer = true
 	isMoving = true
 	move_vector = get_parent().get_node("Player").position - position #Face player when spawned
 
@@ -47,10 +49,17 @@ func _process(delta):
 	$Sprite.play()
 	move(delta)
 
+func game_end():
+	isMoving = false
+	queue_free()
+	
 func move(delta):
 	#Default behavior: Step towards player
 	move_vector = get_parent().get_node("Player").position - position #Face player always
-	position += move_vector.normalized() * delta * SPEED
+	if isChasingPlayer:
+		position += move_vector.normalized() * delta * SPEED
+	else:
+		position -= move_vector.normalized() * delta * SPEED
 
 func updateAnimation():
 	var prevFrame = $Sprite.get_frame()

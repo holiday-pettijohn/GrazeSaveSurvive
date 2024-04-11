@@ -2,12 +2,15 @@ extends Enemy
 
 @export var projectile : PackedScene
 
+var RANGED_VELOCITY_MULT
+
 func set_stats():
-	MAX_HP = 1
+	MAX_HP = 2
 	SPEED = 70
 	XP = 1
 	DMG_CONTACT = 1
 	DMG_RANGED = 1
+	RANGED_VELOCITY_MULT = 1
 	
 func _process(delta):
 	#Ranged enemy: Check distance to player
@@ -15,9 +18,9 @@ func _process(delta):
 	var distance_to_player = player_pos.distance_to(position)
 	
 	if (distance_to_player > 400):
-		isMoving = true
+		isChasingPlayer = true
 	else:
-		isMoving = false
+		isChasingPlayer = false
 	
 	super._process(delta) #Animation and movement code
 	
@@ -28,8 +31,8 @@ func start():
 	super.start() #Call the rest of the parent start code
 
 func _on_attack_cooldown_timeout():
-	if get_parent().get_node("Player").alive == false:
-		return #Don't shoot if player is dead
+	if get_parent().get_node("Player").alive == false or isMoving == false:
+		return #Don't shoot if player is dead or game is won
 	
 	shoot()
 	
@@ -39,8 +42,9 @@ func _on_attack_cooldown_timeout():
 
 func shoot():
 	var firedBullet = projectile.instantiate()
-	var direction = get_parent().get_node("Player").position - position
+	var offset = Vector2(randf_range(-1, 1), randf_range(-1, 1))
+	var direction = get_parent().get_node("Player").position - position + offset
 	firedBullet.position = position
-	firedBullet.velocity = direction.normalized()*100
+	firedBullet.velocity = direction.normalized()*100*RANGED_VELOCITY_MULT
 	firedBullet.DMG = DMG_RANGED
 	add_sibling(firedBullet)
