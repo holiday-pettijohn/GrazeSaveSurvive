@@ -23,7 +23,7 @@ func _process(delta):
 	
 func start():
 	$AttackCooldown.one_shot = true
-	$AttackCooldown.wait_time = randi_range(2,3)
+	$AttackCooldown.wait_time = randi_range(3,6)
 	$AttackCooldown.start()
 	super.start() #Call the rest of the parent start code
 
@@ -40,6 +40,7 @@ func _on_attack_cooldown_timeout():
 func shoot():
 	var firedBullet = projectile.instantiate()
 	var direction = get_parent().get_node("Player").position - position
+	direction = direction.rotated(randf()-0.5)
 	firedBullet.position = position
 	firedBullet.velocity = direction.normalized()*100
 	firedBullet.DMG = DMG_RANGED

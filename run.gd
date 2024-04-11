@@ -101,8 +101,8 @@ func updateWaveDisplay():
 
 func spawnWave():
 	#Spawn enemies
-	var melee_count = 10 + wave_count**2 #Funny enemy scaling go brr
-	var ranged_count = 10 + wave_count**2
+	var melee_count = 5 + wave_count*2 #Funny enemy scaling go brr
+	var ranged_count = 5 + round(wave_count*1.5)
 	# In all seriousness, this does highlight an issue with no enemy collision
 	# What should we do about this?
 	var total_count = melee_count + ranged_count
