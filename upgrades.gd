@@ -16,11 +16,14 @@ func _process(delta):
 
 
 func load_tiles():
+	print(db.inventory)
 	for tile_id in db.inventory:
+		print(tile_id)
 		var new_tile_scene
 		new_tile_scene = tile.instantiate()
-		new_tile_scene.generate_tile(tile_id["item_id"])
 		add_child(new_tile_scene)
+		new_tile_scene.position = Vector2(10*tile_id["item_id"], 100)
+		new_tile_scene.generate_tile(tile_id["item_id"])
 		new_tile_scene.render_tiles()
 
 

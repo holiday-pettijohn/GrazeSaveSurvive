@@ -23,7 +23,7 @@ func _ready():
 	pass
 
 func _on_ready():
-	tile_data = db.get_item_data([tile_id])[0]
+	pass
 
 
 func render_tiles():
@@ -61,6 +61,7 @@ func generate_tile(tile_id_input : int):
 		tile_id = tile_id_input
 		pickable = true
 	
+	tile_data = db.get_item_data([tile_id])[0]
 
 func get_tile_buffs():
 	var buff_types = (tile_data.slice(3, 4).decode_u8(0))
