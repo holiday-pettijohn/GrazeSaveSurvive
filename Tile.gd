@@ -10,7 +10,7 @@ var SAMPLE_TILE_1 = 0x000205840131
 # Buff #s: 8 possible buffs, 1-bit indicator for Buff1-3 (in order: 0x01 -> Buff1=Melee Dmg)
 # Buf Vals: 0-255 multiplier to base buff, dependent on Buff #
 
-const TILE_SIZE = 10
+const TILE_SIZE = 40
 
 var tile_id : int = 0
 var tile_data : PackedByteArray

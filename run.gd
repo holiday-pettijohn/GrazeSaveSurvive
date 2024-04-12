@@ -174,3 +174,7 @@ func updateGlobalTimeDisplay():
 func increment_kills():
 	kills += 1
 
+
+func gain_xp(amount):
+	$Player.gain_xp(amount)
+
