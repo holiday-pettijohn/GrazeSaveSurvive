@@ -5,4 +5,3 @@
 
 export/
 *.sqlite3
-database.sqlite3
