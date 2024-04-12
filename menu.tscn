@@ -67,15 +67,15 @@ script = ExtResource("1_8vvve")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="BgMusic" parent="." instance=ExtResource("5_obl1s")]
-volume_db = -3.279
+volume_db = -20.0
 
 [node name="MouseHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_v5hbq")
-volume_db = -2.342
+volume_db = -20.0
 
 [node name="SelectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_cmfmo")
-volume_db = -7.495
+volume_db = -20.0
 
 [connection signal="mouse_entered" from="MarginContainer/Main Controls/StartRunButton" to="MarginContainer/Main Controls/StartRunButton" method="_on_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Main Controls/StartRunButton" to="MarginContainer/Main Controls/StartRunButton" method="_on_run_pressed"]

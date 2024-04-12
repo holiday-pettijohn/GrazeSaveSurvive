@@ -144,24 +144,23 @@ enemy_ranged_scene = ExtResource("3_6lwf2")
 
 [node name="DeathMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("11_8xxnx")
-volume_db = -6.0
+volume_db = -20.0
 
 [node name="Lvl1Music" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("3_ajgw1")
-volume_db = -11.275
+volume_db = -25.0
 
 [node name="Lvl2Music" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("5_vtkga")
-volume_db = -11.275
+volume_db = -25.0
 
 [node name="Boss BuildupMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("6_x5hhq")
-volume_db = -2.843
+volume_db = -25.0
 
 [node name="Ambience" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("8_7ukm2")
-volume_db = -6.269
-autoplay = true
+volume_db = -25.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
@@ -178,10 +177,10 @@ grow_horizontal = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/WaveDisplay"]
 layout_mode = 0
-offset_left = -25.5
-offset_top = 16.0
-offset_right = 14.5
-offset_bottom = 56.0
+offset_left = -26.0
+offset_top = 20.0
+offset_right = 104.0
+offset_bottom = 60.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/WaveDisplay/HBoxContainer"]
 layout_mode = 2
@@ -222,6 +221,7 @@ offset_left = 62.0
 offset_top = 28.0
 offset_right = 190.0
 offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Time elapsed: 0s"
 horizontal_alignment = 2
 
@@ -277,6 +277,6 @@ position = Vector2(576, 324)
 
 [node name="WaveTimer" type="Timer" parent="."]
 
-[connection signal="death" from="Player" to="." method="game_over"]
 [connection signal="death" from="Player" to="." method="_on_player_death"]
+[connection signal="death" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

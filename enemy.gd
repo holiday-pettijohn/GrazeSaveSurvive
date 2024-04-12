@@ -56,10 +56,8 @@ func game_end():
 func move(delta):
 	#Default behavior: Step towards player
 	move_vector = get_parent().get_node("Player").position - position #Face player always
-	if isChasingPlayer:
-		position += move_vector.normalized() * delta * SPEED
-	else:
-		position -= move_vector.normalized() * delta * SPEED
+	position += move_vector.normalized() * delta * SPEED * pow(-1, !isChasingPlayer)
+	position = position.clamp(Vector2.ZERO, Globals.MAP_SIZE)
 
 func updateAnimation():
 	var prevFrame = $Sprite.get_frame()

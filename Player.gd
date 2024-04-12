@@ -120,6 +120,7 @@ func process_actions(delta):
 		melee_attack()
 
 func process_hit(dmg):
+	hurtSFX.play()
 	hp -= dmg
 	hit.emit()
 
@@ -195,5 +196,4 @@ func game_over():
 
 
 func _on_melee_body_area_entered(body):
-	hurtSFX.play()
 	body.get_parent().process_hit(DMG_MELEE)
