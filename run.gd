@@ -65,7 +65,6 @@ func game_over():
 	$UI/Results.final_kills = kills
 	$UI/Results.win = win
 	$UI/Results.show()
-	deathmusic.play()
 
 func _on_wave_timer_timeout():
 	wave_timeleft -= 1

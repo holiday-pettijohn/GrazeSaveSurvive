@@ -23,6 +23,7 @@ func _physics_process(delta):
 	position.y += velocity.y*delta
 
 func _on_hitbox_entered(area):
+	#Default behavior: Destroy always
 	area.get_parent().process_hit(DMG)
 	pierces -= 1
 	if pierces < 0:

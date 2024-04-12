@@ -51,7 +51,7 @@ func _process(delta):
 
 func game_end():
 	isMoving = false
-	queue_free()
+	#queue_free()
 	
 func move(delta):
 	#Default behavior: Step towards player
@@ -99,11 +99,12 @@ func _on_hurt_area_entered(area):
 func _on_melee_box_area_entered(area):
 	isContactingPlayer = true
 	isMoving = false
-	area.get_parent().process_hit(DMG_CONTACT)
+	area.get_parent().enemy_enter(self)
 
 func _on_melee_box_area_exited(area):
 	isContactingPlayer = false
 	isMoving = true
+	area.get_parent().enemy_exit(self)
 
 func process_hit(dmg):
 	hp -= dmg

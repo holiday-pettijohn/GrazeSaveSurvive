@@ -8,6 +8,7 @@ signal death
 var map_size
 var screen_size
 var alive
+var contacting = {} #Keep track of enemies contacting player
 
 var level
 
@@ -22,10 +23,12 @@ var defense
 
 var mCooldownTimer
 var rCooldownTimer
+var hurtCooldownTimer
 
 # Base melee and ranged cooldowns, in seconds
 var MELEE_COOLDOWN = 1
 var RANGED_COOLDOWN = 1
+var HURT_COOLDOWN = 1
 
 var velocity
 
@@ -53,6 +56,7 @@ func set_stats():
 	MELEE_RANGE = 64 #Melee collision box x-offset from player
 	DMG_MELEE = 1
 	rCooldownTimer = 0
+	hurtCooldownTimer = 0
 
 func start(start_position):
 	position = start_position
@@ -73,13 +77,12 @@ func _ready():
 	$Camera2D.limit_bottom = Globals.MAP_HEIGHT
 
 func _process(delta):
-	if (hp <= 0):
-		$PlayerSprite.animation = "death"
-		death.emit()
+	if (!alive):
 		return
 
 	move(delta)
 	process_actions(delta)
+	process_dmg(delta)
 
 func move(delta):
 	#Process player movement
@@ -119,9 +122,38 @@ func process_actions(delta):
 		mCooldownTimer = MELEE_COOLDOWN
 		melee_attack()
 
+func process_dmg(delta):
+	hurtCooldownTimer = max(hurtCooldownTimer - delta, 0)
+	
+	if hurtCooldownTimer > 0:
+		$PlayerSprite.modulate = Color(1,1,1,0.5)
+		return
+	else:
+		$PlayerSprite.modulate = Color(1,1,1,1)
+	
+	#If enemies are contacting player, take continuous damage
+	if (contacting.size() > 0):
+		var dmg_highest = 0
+		#Get highest damage out of all enemies contacting player
+		for enemy in contacting:
+			if contacting[enemy] > dmg_highest:
+				dmg_highest = contacting[enemy]
+		process_hit(dmg_highest)
+
 func process_hit(dmg):
-	hurtSFX.play()
-	hp -= dmg
+	if (hurtCooldownTimer > 0):
+		return
+	
+	hurtCooldownTimer = HURT_COOLDOWN
+	
+	if (hp > 0):
+		hurtSFX.play() #Check health
+		
+	hp -= dmg #Apply dmg
+	
+	if (hp <= 0):
+		death.emit() #Check death
+	
 	hit.emit()
 
 func ranged_attack():
@@ -183,10 +215,11 @@ func level_threshold(lvl):
 	return lvl*10
 
 func _on_death():
-	if alive: # Prevents multiple unnecessary db refreshes
-		alive = false
-		$PickupBody/PickupBox.set_deferred("disabled", true) #Disable pickups
-		db.refresh()
+	alive = false
+	$PlayerSprite.animation = "death"
+	$PickupBody/PickupBox.set_deferred("disabled", true) #Disable pickups
+	$Body/Hurtbox.set_deferred("disabled", true)
+	db.refresh()
 
 func _on_hit():
 	pass # Replace with function body.
@@ -197,3 +230,11 @@ func game_over():
 
 func _on_melee_body_area_entered(body):
 	body.get_parent().process_hit(DMG_MELEE)
+
+func enemy_enter(enemy):
+	contacting[enemy.get_instance_id()] = enemy.DMG_CONTACT #Track enemy id and damage
+	#print("Enemy entered: ", contacting)
+
+func enemy_exit(enemy):
+	contacting.erase(enemy.get_instance_id()) #Remove enemy from list
+	#print("Enemy left: ", contacting)
