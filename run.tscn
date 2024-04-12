@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c54803c4ku3iv"]
+[gd_scene load_steps=31 format=3 uid="uid://c54803c4ku3iv"]
 
 [ext_resource type="Script" path="res://run.gd" id="1_ho1pr"]
 [ext_resource type="PackedScene" uid="uid://b7yaqvhsdemge" path="res://player.tscn" id="2_7emnb"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://doy4sctiiwn0f" path="res://art/numbers/eight.png" id="15_j35m3"]
 [ext_resource type="Texture2D" uid="uid://y6b62bnemks4" path="res://art/numbers/nine.png" id="16_nxqjj"]
 [ext_resource type="Texture2D" uid="uid://c7pp3y23ycyce" path="res://art/numbers/zero.png" id="17_l47k8"]
+[ext_resource type="Texture2D" uid="uid://drvuremey2bwf" path="res://art/ui_hourglass.png" id="20_36al4"]
+[ext_resource type="Texture2D" uid="uid://bgyd111pnfrn7" path="res://art/ui_shadow.png" id="25_u3vrb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pirmy"]
 animations = [{
@@ -200,13 +202,26 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
+[node name="Hourglass" type="TextureRect" parent="UI/GlobalTimeDisplay"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -57.0
+offset_top = 24.0
+offset_right = -40.0
+offset_bottom = 41.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+texture = ExtResource("20_36al4")
+
 [node name="displayGlobalTime" type="Label" parent="UI/GlobalTimeDisplay"]
 layout_direction = 3
 layout_mode = 0
-offset_left = 22.0
-offset_top = 18.0
-offset_right = 150.0
-offset_bottom = 41.0
+offset_left = 62.0
+offset_top = 28.0
+offset_right = 190.0
+offset_bottom = 51.0
 text = "Time elapsed: 0s"
 horizontal_alignment = 2
 
@@ -236,6 +251,13 @@ value = 10.0
 texture_progress = ExtResource("11_7ei70")
 
 [node name="Results" parent="UI" instance=ExtResource("8_7ttu5")]
+
+[node name="Shadow" type="TextureRect" parent="UI"]
+z_index = -1
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("25_u3vrb")
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
