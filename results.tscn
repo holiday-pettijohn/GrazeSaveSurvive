@@ -10,6 +10,7 @@
 script = ExtResource("1_u3xy4")
 
 [node name="ResultsText" type="RichTextLabel" parent="."]
+z_index = 1
 offset_left = 74.0
 offset_top = 260.0
 offset_right = 708.0
