@@ -1,7 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 *.dll
-*.sqlite3
 
 export/
-*.sqlite3
