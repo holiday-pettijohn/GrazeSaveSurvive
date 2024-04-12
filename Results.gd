@@ -7,6 +7,7 @@ var win
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Menu.grab_focus()
 	final_level = 0
 	final_kills = 0
 	win = false

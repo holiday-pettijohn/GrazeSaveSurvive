@@ -255,6 +255,6 @@ position = Vector2(576, 324)
 
 [node name="WaveTimer" type="Timer" parent="."]
 
-[connection signal="death" from="Player" to="." method="game_over"]
 [connection signal="death" from="Player" to="." method="_on_player_death"]
+[connection signal="death" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
