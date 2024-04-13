@@ -118,8 +118,8 @@ radius = 12.0
 height = 36.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_37x6t"]
-radius = 19.0
-height = 76.0
+radius = 14.0
+height = 40.0
 
 [node name="enemy_melee" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_jalbv")
