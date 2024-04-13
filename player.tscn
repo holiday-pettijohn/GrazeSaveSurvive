@@ -190,7 +190,7 @@ shape = SubResource("RectangleShape2D_o0mbq")
 
 [node name="MeleeSprite" type="AnimatedSprite2D" parent="MeleeBody"]
 position = Vector2(0, 2)
-scale = Vector2(1, 1.875)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_f1xgw")
 
 [node name="MeleeDuration" type="Timer" parent="MeleeBody"]

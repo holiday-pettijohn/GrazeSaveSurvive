@@ -16,6 +16,7 @@ func _ready():
 func _process(delta):
 	#Move in a random direction (for visual effect)
 	position += Vector2(1.0,0.0).rotated(direction) * SPEED * delta
+	position = position.clamp(Vector2.ZERO, Globals.MAP_SIZE)
 	SPEED = max(0, SPEED - friction)
 
 func _on_area_entered(area):

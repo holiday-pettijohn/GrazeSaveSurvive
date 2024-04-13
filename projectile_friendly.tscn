@@ -28,4 +28,5 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_7yxk1")
 
 [node name="Sprite" parent="." index="1"]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_tsoaj")

@@ -17,8 +17,8 @@ func _process(delta):
 		queue_free()
 
 func _physics_process(delta):
-	velocity.x += acceleration.x*delta
-	velocity.y += acceleration.y*delta
+	velocity.x += acceleration.x
+	velocity.y += acceleration.y
 	position.x += velocity.x*delta
 	position.y += velocity.y*delta
 
