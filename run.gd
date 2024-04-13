@@ -94,7 +94,7 @@ func updateMusic():
 		lvl2music.play()
 
 func setWaveTimer():
-	wave_duration = 16 + wave_count #Waves get a little longer
+	wave_duration = 1#6 + wave_count #Waves get a little longer
 
 func updateWaveDisplay():
 	var text_secs = "0"

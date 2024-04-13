@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c54803c4ku3iv"]
+[gd_scene load_steps=34 format=3 uid="uid://c54803c4ku3iv"]
 
 [ext_resource type="Script" path="res://run.gd" id="1_ho1pr"]
 [ext_resource type="PackedScene" uid="uid://b7yaqvhsdemge" path="res://player.tscn" id="2_7emnb"]
@@ -26,6 +26,14 @@ region = Rect2(0, 0, 26, 26)
 [sub_resource type="AtlasTexture" id="AtlasTexture_w3o27"]
 atlas = ExtResource("10_ddo26")
 region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vesi1"]
+atlas = ExtResource("10_ddo26")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfve5"]
+atlas = ExtResource("10_ddo26")
+region = Rect2(0, 0, 26, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_56s5x"]
 atlas = ExtResource("10_ddo26")
@@ -76,6 +84,17 @@ animations = [{
 "loop": true,
 "name": &"1",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vesi1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfve5")
+}],
+"loop": true,
+"name": &"10",
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -221,7 +240,7 @@ texture = ExtResource("9_pb1rm")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/WaveDisplay/HBoxContainer"]
 position = Vector2(145, 19)
 sprite_frames = SubResource("SpriteFrames_pirmy")
-animation = &"3"
+animation = &"10"
 
 [node name="GlobalTimeDisplay" type="Control" parent="UI"]
 layout_mode = 3
