@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://diin1cbx7aik1"]
+[gd_scene load_steps=2 format=3 uid="uid://diin1cbx7aik1"]
 
-[ext_resource type="Texture2D" uid="uid://b72va3hhb5p3n" path="res://art/menu.png" id="1_xuqao"]
 [ext_resource type="Script" path="res://options_menu.gd" id="2_6edvr"]
 
 [node name="MarginContainer" type="MarginContainer"]
@@ -9,50 +8,39 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
 metadata/_edit_use_anchors_ = true
 
-[node name="Background" type="TextureRect" parent="."]
-layout_mode = 2
-texture = ExtResource("1_xuqao")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Options"
 horizontal_alignment = 1
 
-[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Controls" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Controls"
 
-[node name="ScreenRes" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ScreenRes" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Screen Resolution
 "
 
-[node name="VolumeCtrl" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="VolumeCtrl" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Master Volume:"
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 min_value = -80.0
 max_value = 2.08165e-12
 
-[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Back" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Back"
 script = ExtResource("2_6edvr")
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider" to="MarginContainer/VBoxContainer/Back" method="_on_h_slider_value_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="MarginContainer/VBoxContainer/Back" method="_on_back_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HSlider" to="VBoxContainer/Back" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="VBoxContainer/Back" method="_on_back_pressed"]

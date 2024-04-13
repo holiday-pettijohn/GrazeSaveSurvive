@@ -65,11 +65,14 @@ func start(start_position):
 	$PlayerSprite.animation = "idle"
 	$PlayerSprite.play()
 	$Camera2D.reset_smoothing() #Camera jumps immediately to the player
+	show()
 
 	#Attacks
 	melee_hide() #Hide collision box
 
 func _ready():
+	hide()
+	
 	#Set camera bounds
 	$Camera2D.limit_top = 0
 	$Camera2D.limit_left = 0
