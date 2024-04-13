@@ -21,7 +21,7 @@ func _process(delta):
 func game_end():
 	var win_string = ""
 	if (win):
-		win_string = "You won!"
+		win_string = "You Won!\nThere are only 10 things a cow wants to do in life. Grazing and Surviving!"
 	else:
-		win_string = "Game Over"
+		win_string = "Game Over...\nThere are only 10 things a cow wants to do in life. Dying is not one of them..."
 	$ResultsText.set_text("Final Level: {l}\nKills: {k}\n{w}".format({"l": final_level, "k": final_kills, "w": win_string}))

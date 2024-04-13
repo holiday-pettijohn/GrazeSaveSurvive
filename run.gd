@@ -70,19 +70,19 @@ func _on_wave_timer_timeout():
 	wave_timeleft -= 1
 	total_time += 1
 
-	if (wave_timeleft <= 0 and wave_count < 10):
+	if (wave_timeleft <= 0 and wave_count <= 10):
 		spawnWave()
 
 		wave_count += 1
 		setWaveTimer() #Reset timer
 		updateMusic()
 		wave_timeleft = wave_duration
-	elif wave_count == 10:
+		updateWaveDisplay()
+		updateGlobalTimeDisplay()
+	elif wave_count == 11:
 		win = 1
 		game_over()
 		game_end.emit() #Spawn big enemy instance? Otherwise win
-	updateWaveDisplay()
-	updateGlobalTimeDisplay()
 
 func updateMusic():
 	if (wave_count == 5):
@@ -94,7 +94,7 @@ func updateMusic():
 		lvl2music.play()
 
 func setWaveTimer():
-	wave_duration = 15 + 2*wave_count #Waves get a little longer
+	wave_duration = 16 + wave_count #Waves get a little longer
 
 func updateWaveDisplay():
 	var text_secs = "0"
