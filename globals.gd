@@ -16,3 +16,14 @@ const DB_PATH = "res://database.sqlite3"
 
 func _ready():
 	pass
+
+var GRAB_LOCK = false
+
+func get_grab_lock():
+	if GRAB_LOCK:
+		return false
+	GRAB_LOCK = true
+	return GRAB_LOCK
+
+func release_grab_lock():
+	GRAB_LOCK = false

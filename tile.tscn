@@ -5,8 +5,8 @@
 
 [node name="Tile" type="Area2D"]
 z_index = -1
-collision_layer = 0
-collision_mask = 36
+collision_layer = 32
+collision_mask = 4
 script = ExtResource("1_cx7p8")
 
 [node name="TheTheSprite" type="Sprite2D" parent="."]
@@ -14,7 +14,6 @@ visible = false
 texture = ExtResource("2_co50d")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="ready" from="." to="." method="_on_ready"]

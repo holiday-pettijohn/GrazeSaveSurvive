@@ -88,13 +88,15 @@ var grabbed_offset = Vector2()
 
 func _process(delta):
 	if Input.is_action_pressed("click"):
-		if mouse_in and !clicked:
+		if mouse_in and !clicked and Globals.get_grab_lock():
 			clicked = true
 			grabbed_offset = position - get_global_mouse_position()
 		if clicked and pickable:
 			position = get_global_mouse_position() + grabbed_offset
 	else:
-		clicked = false
+		if clicked:
+			clicked = false
+			Globals.release_grab_lock()
 
 func _on_mouse_entered():
 	grabbed_offset = position - get_global_mouse_position()
