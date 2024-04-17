@@ -15,12 +15,13 @@ func refresh():
 	for item_id in new_items:
 		db.insert_row("player_item_inventory", {"player_id": player_id, "item_id" : item_id})
 	new_items.clear()
-	inventory = db.select_rows("player_item_inventory", "player_id = " + var_to_str(player_id), ["item_id"])
+	for item in db.select_rows("player_item_inventory", "player_id = " + var_to_str(player_id), ["item_id"]):
+		inventory.push_back(item["item_id"])
 	db.close_db()
 
 func get_item_data(item_ids : Array):
-	db.open_db()
 	var items : Array
+	db.open_db()
 	var query_string = "SELECT hex(data) FROM item WHERE item_id = ?;"
 	for item_id in item_ids:
 		db.query_with_bindings(query_string, [item_id])
@@ -31,4 +32,6 @@ func get_item_data(item_ids : Array):
 func add_items(item_ids : Array):
 	for item_id in item_ids:
 		new_items.push_back(item_id)
+		if (!inventory.find(item_id)):
+			inventory.push_back(item_id)
 		
