@@ -14,9 +14,13 @@ const TILE_SIZE = 40
 
 var tile_id : int = 0
 var tile_data : PackedByteArray
+var bitmap
 var pickable = false
+var in_grid = false
 
 var tile_offset = Vector2i(TILE_SIZE, TILE_SIZE)
+
+const upgrades_grid = preload("res://upgrades_grid.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,11 +33,12 @@ func _on_ready():
 func render_tiles():
 	var bitmap_data = tile_data.slice(-2)
 	bitmap_data.reverse() # was having problems w/o doing this, endianness maybe?
-	var bitmap = bitmap_data.decode_u16(0)
+	bitmap = bitmap_data.decode_u16(0)
+	var load_bitmap = bitmap
 	
 	for y in 4:
 		for x in 4:
-			if (bitmap & 0x1):
+			if (load_bitmap & 0x1):
 				var tile_rect = Sprite2D.new()
 				tile_rect.position = Vector2(x*tile_offset[0], y*tile_offset[1])
 				tile_rect.set_texture($TheTheSprite.texture)
@@ -47,7 +52,7 @@ func render_tiles():
 				tile_grab.shape.size = Vector2(tile_offset[0], tile_offset[1])
 				add_child(tile_grab)
 				
-			bitmap = bitmap >> 1
+			load_bitmap = load_bitmap >> 1
 
 
 func generate_tile(tile_id_input : int):
@@ -85,18 +90,33 @@ func _on_area_entered(area):
 var mouse_in = false
 var clicked = false
 var grabbed_offset = Vector2()
+var grid_position = Vector2()
+var load_position = Vector2()
 
 func _process(delta):
-	if Input.is_action_pressed("click"):
+	if pickable and Input.is_action_pressed("click"):
 		if mouse_in and !clicked and Globals.get_grab_lock():
 			clicked = true
 			grabbed_offset = position - get_global_mouse_position()
-		if clicked and pickable:
-			position = get_global_mouse_position() + grabbed_offset
-	else:
+			z_index = 1
+			if in_grid:
+				upgrades_grid.clear_tile_grid_spot(grid_position, bitmap)
+				in_grid = false
 		if clicked:
-			clicked = false
-			Globals.release_grab_lock()
+			position = get_global_mouse_position() + grabbed_offset
+	elif clicked:
+		clicked = false
+		z_index = 0
+		Globals.release_grab_lock()
+		if pos_in_grid():
+			var snap_position = Vector2((position.x - (int(position.x) % 40) + (40 - (Globals.GRID_X % 40))), (position.y - (int(position.y) % 40) + (40 - (Globals.GRID_Y % 40))))
+			grid_position = Vector2((snap_position.x - Globals.GRID_X - 20) / 40, (snap_position.y - Globals.GRID_Y - 20) / 40)
+			if upgrades_grid.check_tile_grid_spot(grid_position, bitmap): #grid empty AND in-bounds
+				position = snap_position
+				upgrades_grid.set_tile_grid_spot(grid_position, bitmap, tile_id)
+				in_grid = true
+			else:
+				position = load_position
 
 func _on_mouse_entered():
 	grabbed_offset = position - get_global_mouse_position()
@@ -104,3 +124,7 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	mouse_in = false
+
+
+func pos_in_grid():
+	return position.x >= (Globals.GRID_X) && position.x <= (Globals.GRID_X + Globals.GRID_SIZE) && position.y >= (Globals.GRID_Y) && position.y <= (Globals.GRID_Y + Globals.GRID_SIZE)

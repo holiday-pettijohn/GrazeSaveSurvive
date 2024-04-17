@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgnr0wq45o5br"]
+[gd_scene load_steps=6 format=3 uid="uid://cgnr0wq45o5br"]
 
 [ext_resource type="Script" path="res://BackButton.gd" id="1_nde5e"]
 [ext_resource type="Script" path="res://upgrades.gd" id="1_ou8nr"]
 [ext_resource type="PackedScene" uid="uid://dmc4wtywvud4y" path="res://BgMusic.tscn" id="2_753s4"]
 [ext_resource type="PackedScene" uid="uid://dhmd17xaaygxf" path="res://tile.tscn" id="2_obfxh"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mfs28"]
 
 [node name="Upgrades" type="Node2D"]
 script = ExtResource("1_ou8nr")
@@ -20,113 +22,13 @@ text = "Back"
 script = ExtResource("1_nde5e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
-[node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 458.0
-offset_top = 72.0
-offset_right = 768.0
-offset_bottom = 353.0
-columns = 5
-
-[node name="tile1_1" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile1_2" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile1_3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile1_4" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile1_5" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile2_1" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile2_2" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile2_3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile2_4" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile2_5" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile3_1" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile3_2" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile3_3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile3_4" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile3_5" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile4_1" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile4_2" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile4_3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile4_4" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile4_5" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile5_1" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile5_2" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile5_3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile5_4" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="tile5_5" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(350, 50)
+scale = Vector2(160, 160)
+texture = SubResource("PlaceholderTexture2D_mfs28")
+centered = false
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="BackButton" to="BackButton" method="_on_back_pressed"]

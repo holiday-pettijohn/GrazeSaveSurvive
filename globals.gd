@@ -11,6 +11,11 @@ const GAME_WIDTH = 800
 const GAME_HEIGHT = 800
 const GAME_SIZE = Vector2(GAME_WIDTH, GAME_HEIGHT)
 
+#Position of grid in Upgrades Menu
+const GRID_X = 350
+const GRID_Y = 50
+const GRID_SIZE = 160
+
 # Database constants
 const DB_PATH = "res://database.sqlite3"
 

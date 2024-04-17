@@ -2,29 +2,25 @@ extends Node2D
 
 @export var tile : PackedScene
 
+var tile_array : Array
 
-var grid_field = [[-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1]]
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+const upgrades_grid = preload("res://upgrades_grid.gd")
 
 func load_tiles():
-	print(db.inventory)
+	upgrades_grid.load_grid()
+	var tile_count = 0
 	for tile_id in db.inventory:
-		print(tile_id)
+		var tile_name = "tile_" + var_to_str(tile_id)
 		var new_tile_scene
 		new_tile_scene = tile.instantiate()
+		new_tile_scene.set_name(tile_name)
 		add_child(new_tile_scene)
-		new_tile_scene.position = Vector2(10*tile_id["item_id"], 100)
-		new_tile_scene.generate_tile(tile_id["item_id"])
+		new_tile_scene.position = Vector2(20 * (tile_count % 6) + 50, 100 * floor(tile_count / 6) + 150 + (50 * floor(tile_count/6)))
+		new_tile_scene.load_position = new_tile_scene.position
+		new_tile_scene.generate_tile(tile_id)
 		new_tile_scene.render_tiles()
+		tile_array.push_back(tile_name)
+		tile_count += 1
 
 
 func _on_ready():
