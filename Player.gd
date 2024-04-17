@@ -32,6 +32,8 @@ var HURT_COOLDOWN = 1
 
 var velocity
 
+const upgrades = preload("res://upgrades_grid.gd")
+
 @onready var hitSound = $"Hit SFX"
 @onready var pickupSFX = $"Pickup SFX"
 @onready var hurtSFX = $"HurtSound"
@@ -40,11 +42,11 @@ func set_stats():
 	alive = true
 
 	#Player Stats (from parent)
-	MAX_HP = 5
+	MAX_HP = 5 + (0.5 * upgrades.tile_upgrades[7])
 	SPEED = 250
 	# Base contact and ranged damage
 	DMG_CONTACT = 0
-	DMG_RANGED = 1
+	DMG_RANGED = 1 + (0.05 * upgrades.tile_upgrades[0]) + (0.05 * upgrades.tile_upgrades[2])
 
 	#Assigning values
 	level = 1
@@ -53,14 +55,18 @@ func set_stats():
 
 	#Attack Stats
 	mCooldownTimer = 0
-	MELEE_RANGE = 64 #Melee collision box x-offset from player
-	DMG_MELEE = 1
+	MELEE_RANGE = 64 + (2 * upgrades.tile_upgrades[3])#Melee collision box x-offset from player
+	DMG_MELEE = 1 + (0.05 * upgrades.tile_upgrades[1]) + (0.05 * upgrades.tile_upgrades[2])
 	rCooldownTimer = 0
 	hurtCooldownTimer = 0
+	
+	RANGED_COOLDOWN -= (0.1 * upgrades.tile_upgrades[5])
+	MELEE_COOLDOWN -= (0.1 * upgrades.tile_upgrades[6])
 
 func start(start_position):
 	position = start_position
 	velocity = Vector2.ZERO
+	upgrades.get_tile_buffs()
 	set_stats();
 	$PlayerSprite.animation = "idle"
 	$PlayerSprite.play()
@@ -165,7 +171,7 @@ func ranged_attack():
 	firedBullet.position = $ProjectileOrigin.global_position
 	if direction == -1:
 		firedBullet.position.x -= 2*$ProjectileOrigin.position.x
-	firedBullet.velocity = Vector2(direction*1000, 0)
+	firedBullet.velocity = Vector2(direction*(1000 + (10 * upgrades.tile_upgrades[4])), 0)
 	firedBullet.DMG = DMG_RANGED
 
 	hitSound.play()

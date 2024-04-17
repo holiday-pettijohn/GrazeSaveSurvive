@@ -3,7 +3,7 @@ extends Node
 var db : SQLite = SQLite.new()
 static var player_id : int = 0
 var new_items : Array
-var inventory : Array # contains [{"item_id" : ID#}]
+var inventory : Array # contains [ID#]
 
 func _ready():
 	db.path = Globals.DB_PATH

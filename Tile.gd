@@ -68,18 +68,6 @@ func generate_tile(tile_id_input : int):
 	
 	tile_data = db.get_item_data([tile_id])[0]
 
-func get_tile_buffs():
-	var buff_types = (tile_data.slice(3, 4).decode_u8(0))
-	var buff_values = tile_data.slice(0, 3)
-	var buffs = {}
-	
-	for x in 8:
-		if (buff_types & 0x1):
-			buffs[x] = int(buff_values[-1] & 0xFF)
-			buff_values = buff_values.slice(0, -1)
-		buff_types = buff_types >> 1
-	return buffs
-
 
 func _on_area_entered(area):
 	db.add_items([tile_id])

@@ -1,8 +1,10 @@
 extends Node
 
 static var grid_field : Array
+static var tile_upgrades : Array
 
 static func load_grid():
+	grid_field = []
 	for x in Globals.GRID_SIZE / 40:
 		var grid_row : Array
 		for y in Globals.GRID_SIZE / 40:
@@ -49,3 +51,25 @@ static func clear_tile_grid_spot(grid_spot : Vector2, bitmap : int):
 
 func get_tile_grid_spot(item_id : int):
 	pass #TODO
+
+
+
+static func get_tile_buffs():
+	tile_upgrades = [0, 0, 0, 0, 0, 0, 0, 0]
+	var tiles_in_grid = []
+	for x in grid_field:
+		for y in x:
+			if (y != -1) and (tiles_in_grid.find(y) == -1):
+				tiles_in_grid.push_back(y)
+	
+	var tile_data_array : Array = db.get_item_data(tiles_in_grid)
+	for tile_data in tile_data_array:
+		var buff_types = (tile_data.slice(3, 4).decode_u8(0))
+		var buff_values = tile_data.slice(0, 3)
+		
+		for x in 8:
+			if (buff_types & 0x1):
+				tile_upgrades[x] += int(buff_values[-1])# & 0xFF
+				buff_values = buff_values.slice(0, -1)
+			buff_types = buff_types >> 1
+
