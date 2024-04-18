@@ -37,20 +37,19 @@ static func set_tile_grid_spot(grid_spot : Vector2, bitmap : int, tile_id : int)
 				print("SET: " + var_to_str(grid_spot.x) + "+" + var_to_str(x) + ", " + var_to_str(grid_spot.y) + "+" + var_to_str(y))
 				grid_field[grid_spot.x + x][grid_spot.y + y] = tile_id
 			bitmap = bitmap >> 1
+	db.add_grid([{"x": grid_spot.x, "y": grid_spot.y, "item_id": tile_id}])
 	print(grid_field)
 
-static func clear_tile_grid_spot(grid_spot : Vector2, bitmap : int):
+static func clear_tile_grid_spot(grid_spot : Vector2, bitmap : int, tile_id: int):
 	print("clearing")
 	for y in 4:
 		for x in 4:
 			if bitmap & 0x1:
 				grid_field[grid_spot.x + x][grid_spot.y + y] = -1
 			bitmap = bitmap >> 1
+	db.pop_grid([{"x": grid_spot.x, "y": grid_spot.y, "item_id": tile_id}])
 	print(grid_field)
 
-
-func get_tile_grid_spot(item_id : int):
-	pass #TODO
 
 
 

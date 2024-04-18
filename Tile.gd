@@ -84,12 +84,12 @@ var load_position = Vector2()
 func _process(delta):
 	if pickable and Input.is_action_pressed("click"):
 		if mouse_in and !clicked and Globals.get_grab_lock():
+			if in_grid:
+				upgrades_grid.clear_tile_grid_spot(grid_position, bitmap, tile_id)
+				in_grid = false
 			clicked = true
 			grabbed_offset = position - get_global_mouse_position()
 			z_index = 1
-			if in_grid:
-				upgrades_grid.clear_tile_grid_spot(grid_position, bitmap)
-				in_grid = false
 		if clicked:
 			position = get_global_mouse_position() + grabbed_offset
 	elif clicked:
@@ -97,14 +97,7 @@ func _process(delta):
 		z_index = 0
 		Globals.release_grab_lock()
 		if pos_in_grid():
-			var snap_position = Vector2((position.x - (int(position.x) % 40) + (40 - (Globals.GRID_X % 40))), (position.y - (int(position.y) % 40) + (40 - (Globals.GRID_Y % 40))))
-			grid_position = Vector2((snap_position.x - Globals.GRID_X - 20) / 40, (snap_position.y - Globals.GRID_Y - 20) / 40)
-			if upgrades_grid.check_tile_grid_spot(grid_position, bitmap): #grid empty AND in-bounds
-				position = snap_position
-				upgrades_grid.set_tile_grid_spot(grid_position, bitmap, tile_id)
-				in_grid = true
-			else:
-				position = load_position
+			snap_to_grid()
 
 func _on_mouse_entered():
 	grabbed_offset = position - get_global_mouse_position()
@@ -113,6 +106,16 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	mouse_in = false
 
+
+func snap_to_grid():
+	var snap_position = Vector2((position.x - (int(position.x) % 40) + (40 - (Globals.GRID_X % 40))), (position.y - (int(position.y) % 40) + (40 - (Globals.GRID_Y % 40))))
+	grid_position = Vector2((snap_position.x - Globals.GRID_X - 20) / 40, (snap_position.y - Globals.GRID_Y - 20) / 40)
+	if upgrades_grid.check_tile_grid_spot(grid_position, bitmap): #grid empty AND in-bounds
+		position = snap_position
+		upgrades_grid.set_tile_grid_spot(grid_position, bitmap, tile_id)
+		in_grid = true
+	else:
+		position = load_position
 
 func pos_in_grid():
 	return position.x >= (Globals.GRID_X) && position.x <= (Globals.GRID_X + Globals.GRID_SIZE) && position.y >= (Globals.GRID_Y) && position.y <= (Globals.GRID_Y + Globals.GRID_SIZE)

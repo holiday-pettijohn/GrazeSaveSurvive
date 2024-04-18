@@ -17,6 +17,9 @@ func load_tiles():
 		add_child(new_tile_scene)
 		new_tile_scene.position = Vector2(20 * (tile_count % 6) + 50, 100 * floor(tile_count / 6) + 150 + (50 * floor(tile_count/6)))
 		new_tile_scene.load_position = new_tile_scene.position
+		if db.grid[tile_id]["x"] != -1:
+			new_tile_scene.position = Vector2((Globals.GRID_X + 20 + (40 * db.grid[tile_id]["x"])),(Globals.GRID_Y + 20 + (40 * db.grid[tile_id]["y"])))
+			new_tile_scene.in_grid = true
 		new_tile_scene.generate_tile(tile_id)
 		new_tile_scene.render_tiles()
 		tile_array.push_back(tile_name)
