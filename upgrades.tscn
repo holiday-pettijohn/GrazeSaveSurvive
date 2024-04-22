@@ -30,5 +30,11 @@ scale = Vector2(160, 160)
 texture = SubResource("PlaceholderTexture2D_mfs28")
 centered = false
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 360.0
+offset_top = 264.0
+offset_right = 768.0
+offset_bottom = 720.0
+
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="BackButton" to="BackButton" method="_on_back_pressed"]
