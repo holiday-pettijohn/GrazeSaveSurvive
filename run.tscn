@@ -1,10 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://c54803c4ku3iv"]
+[gd_scene load_steps=35 format=3 uid="uid://c54803c4ku3iv"]
 
 [ext_resource type="Script" path="res://run.gd" id="1_ho1pr"]
 [ext_resource type="PackedScene" uid="uid://b7yaqvhsdemge" path="res://player.tscn" id="2_7emnb"]
 [ext_resource type="PackedScene" uid="uid://n7grhy18j88u" path="res://enemy_melee.tscn" id="2_ta0op"]
 [ext_resource type="PackedScene" uid="uid://wm23a65shf2p" path="res://enemy_ranged.tscn" id="3_6lwf2"]
 [ext_resource type="AudioStream" uid="uid://55tsbmscdp44" path="res://music/Lvl 2 Music.mp3" id="3_ajgw1"]
+[ext_resource type="AudioStream" uid="uid://bdfvy0kf68hk3" path="res://music/Intro Level.mp3" id="5_h0wwr"]
 [ext_resource type="AudioStream" uid="uid://bqd58p0khumk8" path="res://music/Build music.mp3" id="5_vtkga"]
 [ext_resource type="AudioStream" uid="uid://ddhbguwdok4xu" path="res://music/Boss Build.mp3" id="6_x5hhq"]
 [ext_resource type="PackedScene" uid="uid://brpm2kg82dhhe" path="res://results.tscn" id="8_7ttu5"]
@@ -197,11 +198,15 @@ stream = ExtResource("11_8xxnx")
 volume_db = -20.0
 
 [node name="Lvl1Music" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("3_ajgw1")
+stream = ExtResource("5_h0wwr")
+volume_db = -25.0
+
+[node name="Lvl3Music" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("5_vtkga")
 volume_db = -25.0
 
 [node name="Lvl2Music" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("5_vtkga")
+stream = ExtResource("3_ajgw1")
 volume_db = -25.0
 
 [node name="Boss BuildupMusic" type="AudioStreamPlayer" parent="Music"]
@@ -327,6 +332,6 @@ position = Vector2(576, 324)
 
 [node name="WaveTimer" type="Timer" parent="."]
 
-[connection signal="death" from="Player" to="." method="_on_player_death"]
 [connection signal="death" from="Player" to="." method="game_over"]
+[connection signal="death" from="Player" to="." method="_on_player_death"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

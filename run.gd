@@ -11,6 +11,7 @@ var game_started: bool
 
 @onready var lvl1music = $"Music/Lvl1Music"
 @onready var lvl2music = $"Music/Lvl2Music"
+@onready var lvl3music = $"Music/Lvl3Music"
 @onready var bossBuildTune = $"Music/Boss BuildupMusic"
 @onready var deathmusic = $"Music/DeathMusic"
 
@@ -59,6 +60,7 @@ func _on_player_death():
 func game_over():
 	lvl1music.stop()
 	lvl2music.stop()
+	lvl3music.stop()
 	bossBuildTune.stop()
 	$WaveTimer.stop()
 	$UI/Results.final_level = $Player.level
@@ -87,13 +89,17 @@ func _on_wave_timer_timeout():
 	updateGlobalTimeDisplay()
 
 func updateMusic():
-	if (wave_count == 5):
+	if (wave_count == 2):
 		lvl1music.stop()
+		lvl2music.play()
+		
+	if (wave_count == 5):
+		lvl2music.stop()
 		bossBuildTune.play()
 
 	if (wave_count == 6):
 		bossBuildTune.stop()
-		lvl2music.play()
+		lvl3music.play()
 
 func setWaveTimer():
 	wave_duration = 16 + wave_count #Waves get a little longer
